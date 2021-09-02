@@ -14,7 +14,9 @@
 		C22A91A726DFAA25007C5AAE /* komunikacjaliveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22A91A626DFAA25007C5AAE /* komunikacjaliveTests.swift */; };
 		C22A91B226DFAA25007C5AAE /* komunikacjaliveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22A91B126DFAA25007C5AAE /* komunikacjaliveUITests.swift */; };
 		C22A91CA26DFAA89007C5AAE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22A91C926DFAA89007C5AAE /* MapView.swift */; };
-		C2588F8426DFBD2B00574135 /* AnnotationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2588F8326DFBD2B00574135 /* AnnotationItem.swift */; };
+		C246C7FA26E0F2CF00D9F693 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C246C7F926E0F2CF00D9F693 /* MockData.swift */; };
+		C246C80226E1057400D9F693 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C246C80126E1057400D9F693 /* MapViewModel.swift */; };
+		C2588F8426DFBD2B00574135 /* VehicleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +50,9 @@
 		C22A91B126DFAA25007C5AAE /* komunikacjaliveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = komunikacjaliveUITests.swift; sourceTree = "<group>"; };
 		C22A91B326DFAA25007C5AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C22A91C926DFAA89007C5AAE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		C2588F8326DFBD2B00574135 /* AnnotationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationItem.swift; sourceTree = "<group>"; };
+		C246C7F926E0F2CF00D9F693 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		C246C80126E1057400D9F693 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,7 @@
 				C22A91C226DFAA51007C5AAE /* Model */,
 				C22A91C326DFAA5A007C5AAE /* View */,
 				C22A91C426DFAA71007C5AAE /* ViewModel */,
+				C246C7F826E0F2A700D9F693 /* Helpers */,
 				C22A919826DFAA25007C5AAE /* Assets.xcassets */,
 				C22A919D26DFAA25007C5AAE /* Info.plist */,
 				C22A919A26DFAA25007C5AAE /* Preview Content */,
@@ -140,7 +145,7 @@
 		C22A91C226DFAA51007C5AAE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C2588F8326DFBD2B00574135 /* AnnotationItem.swift */,
+				C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 		C22A91C426DFAA71007C5AAE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C246C80126E1057400D9F693 /* MapViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -166,6 +172,14 @@
 				C22A91C926DFAA89007C5AAE /* MapView.swift */,
 			);
 			path = MapView;
+			sourceTree = "<group>";
+		};
+		C246C7F826E0F2A700D9F693 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C246C7F926E0F2CF00D9F693 /* MockData.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,9 +312,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C22A919726DFAA24007C5AAE /* ContentView.swift in Sources */,
-				C2588F8426DFBD2B00574135 /* AnnotationItem.swift in Sources */,
+				C2588F8426DFBD2B00574135 /* VehicleAnnotation.swift in Sources */,
 				C22A91CA26DFAA89007C5AAE /* MapView.swift in Sources */,
 				C22A919526DFAA24007C5AAE /* komunikacjaliveApp.swift in Sources */,
+				C246C7FA26E0F2CF00D9F693 /* MockData.swift in Sources */,
+				C246C80226E1057400D9F693 /* MapViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

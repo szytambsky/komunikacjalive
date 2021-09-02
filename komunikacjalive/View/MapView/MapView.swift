@@ -9,26 +9,28 @@ import MapKit
 import SwiftUI
 
 struct MapView: View {
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 52.237049, longitude: 21.01753),
-        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    @StateObject private var viewModel = MapViewModel()
     
     let screen = UIScreen.main.bounds
     
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $region)
-            
+            Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
+                .accentColor(Color(.systemPink))
+                .onAppear {
+                    viewModel.checkIfLocationServicesIsEnabled()
+                }
+
             VStack {
                 Spacer()
                 
                 Button(action: {
                     withAnimation {
-                        region.span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+                        viewModel.region.span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
                     }
                 }, label: {
                     Text("Zoom in")
-                        .frame(width: screen.width/3)
+                        //.frame(width: screen.width/3)
                         .font(.system(size: 22, weight: .bold, design: .default))
                         .padding()
                         .background(Color.green)
