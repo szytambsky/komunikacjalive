@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    //@State private var showModalPopUp = false
+    
     var body: some View {
-        MapView()
-            .edgesIgnoringSafeArea(.all)
+        ZStack {
+            Color.black
+                .edgesIgnoringSafeArea(.all)
+            
+            MapView()
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ZStack {
+            Color.black
+                .edgesIgnoringSafeArea(.all)
+            
+            ContentView()
+        }
     }
 }

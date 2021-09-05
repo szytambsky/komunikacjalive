@@ -10,10 +10,12 @@ import MapKit
 
 enum MapDetails {
     static let startingLocation = CLLocationCoordinate2D(latitude: 52.237049, longitude: 21.01753)
-    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
 }
 
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    //@Published var lines: [VehicleAnnotation] = [exampleAnnotation1, exampleAnnotation2, exampleAnnotation3, exampleAnnotation4]
+    @Published var lines: [VehicleAnnotation] = [exampleAnnotation1, exampleAnnotation2]
     
     @Published var region = MKCoordinateRegion(
         center: MapDetails.startingLocation,
@@ -21,6 +23,8 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     // nil => user can turn off location services for whole phone
     var locationManager: CLLocationManager?
+    
+    static let shared = MapViewModel()
     
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
