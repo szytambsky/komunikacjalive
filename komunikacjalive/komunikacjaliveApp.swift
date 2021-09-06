@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct komunikacjaliveApp: App {
+    //@StateObject var viewModel = MapViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(MapViewModel.shared)
+            ContentView()
+                .environmentObject(MapViewModel.shared)
+                //.environmentObject(viewModel)
         }
     }
 }

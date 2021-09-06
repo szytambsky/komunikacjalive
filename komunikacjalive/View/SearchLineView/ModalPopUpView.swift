@@ -11,7 +11,7 @@ struct ModalPopUpView: View {
     var lines: [VehicleAnnotation]
     //@Binding var showModalPopUp: Bool
     @State private var searchText = ""
-    @Binding var navBarHidden: Bool
+    @Binding var searchShowLinesView: Bool
     
     var body: some View {
         ZStack {
@@ -19,6 +19,19 @@ struct ModalPopUpView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 8) {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        searchShowLinesView = false
+                    }, label: {
+                        Image(systemName: "xmark.circle")
+                            .font(.system(size: 34))
+                            .foregroundColor(.white)
+                    })
+                }
+                
+                Spacer()
+                
                 SearchBar(searchText: $searchText)
                 
                 Spacer()
@@ -38,7 +51,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
             Color.black
                 .edgesIgnoringSafeArea(.all)
             
-            ModalPopUpView(lines: allExampleAnnotations, navBarHidden: .constant(true))
+            ModalPopUpView(lines: allExampleAnnotations, searchShowLinesView: .constant(true))
         }//showModalPopUp: .constant(true))
     }
 }

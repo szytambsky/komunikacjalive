@@ -16,6 +16,7 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             MapView()
+                .edgesIgnoringSafeArea(.all)
         }
     }
 }
@@ -27,6 +28,7 @@ struct ContentView_Previews: PreviewProvider {
                 .edgesIgnoringSafeArea(.all)
             
             ContentView()
+                .environmentObject(MapViewModel())
         }
     }
 }
