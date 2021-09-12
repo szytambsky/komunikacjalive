@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchLinesView: View {
     var lines: [VehicleAnnotation]
+    @Binding var favouriteLines: [String]
     
     let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -20,11 +21,9 @@ struct SearchLinesView: View {
     
     var body: some View {
         VStack {
-            LazyVGrid(columns: columns,spacing: 2) {
-                ForEach(0..<lines.count) { lineIndex in
-                    let line = lines[lineIndex]
-                    StandardLineView(line: line)
-                        .frame(height: 60)
+            LazyVGrid(columns: columns, spacing: 2) {
+                ForEach(lines) { line in
+                    StandardLineView(line: line, favouriteLines: $favouriteLines)
                 }
             }
             
@@ -40,7 +39,7 @@ struct SearchLinesView_Previews: PreviewProvider {
             Color.black
                 .edgesIgnoringSafeArea(.all)
             
-            SearchLinesView(lines: allExampleAnnotations)
+            SearchLinesView(lines: allExampleAnnotations, favouriteLines: .constant(exampleLinesString))
         }
     }
 }

@@ -8,13 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    //@State private var showModalPopUp = false
     
     var body: some View {
         ZStack {
-            Color.black
-                .edgesIgnoringSafeArea(.all)
-            
             MapView()
                 .edgesIgnoringSafeArea(.all)
         }

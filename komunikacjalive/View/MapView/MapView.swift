@@ -10,8 +10,10 @@ import SwiftUI
 
 struct MapView: View {
     @EnvironmentObject private var viewModel: MapViewModel
+    @ObservedObject private var fetcher = LineViewModel()
     
     @State private var showSearchLinesView = false
+    @State private var favouriteLines = [String]()
     
     let screen = UIScreen.main.bounds
     
@@ -20,7 +22,7 @@ struct MapView: View {
             Map(coordinateRegion: $viewModel.region,
                 interactionModes: .all,
                 showsUserLocation: true,
-                annotationItems: viewModel.lines) { item in
+                annotationItems: fetcher.lines) { item in
                 MapAnnotation(coordinate: item.coordinate) {
                     ZStack {
                         Circle()
@@ -56,7 +58,7 @@ struct MapView: View {
                             .padding(.trailing, 16)
                     })
                     .fullScreenCover(isPresented: $showSearchLinesView, content: {
-                        ModalPopUpView(lines: viewModel.lines, searchShowLinesView: $showSearchLinesView)
+                        ModalPopUpView(fetcher: fetcher, lines: fetcher.lines, searchShowLinesView: $showSearchLinesView, favouriteLines: $favouriteLines)
                     })
                 }
                 
@@ -76,6 +78,10 @@ struct MapView: View {
                 })
                 .padding(.bottom, 40)
                 .foregroundColor(.white)
+            }
+            
+            if fetcher.isLoading {
+                LoadingView()
             }
         }
     }

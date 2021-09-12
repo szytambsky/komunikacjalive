@@ -8,10 +8,22 @@
 import SwiftUI
 
 struct ModalPopUpView: View {
+    @ObservedObject var fetcher: LineViewModel
+    
     var lines: [VehicleAnnotation]
     //@Binding var showModalPopUp: Bool
     @State private var searchText = ""
     @Binding var searchShowLinesView: Bool
+    
+    @Binding var favouriteLines: [String]
+    
+    var filteredLines: [VehicleAnnotation] {
+        if searchText.count == 0 {
+            return lines
+        } else {
+            return lines.filter({ $0.lineName.contains(searchText)})
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -28,6 +40,7 @@ struct ModalPopUpView: View {
                             .font(.system(size: 34))
                             .foregroundColor(.white)
                     })
+                    .padding(.horizontal)
                 }
                 
                 Spacer()
@@ -37,10 +50,11 @@ struct ModalPopUpView: View {
                 Spacer()
                 
                 ScrollView(showsIndicators: false, content: {
-                    SearchLinesView(lines: lines)
+                    SearchLinesView(lines: filteredLines, favouriteLines: $favouriteLines)
                 })
                 .padding()
             }
+            
         }
     }
 }
@@ -51,7 +65,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
             Color.black
                 .edgesIgnoringSafeArea(.all)
             
-            ModalPopUpView(lines: allExampleAnnotations, searchShowLinesView: .constant(true))
+            ModalPopUpView(fetcher: LineViewModel(service: LineService()), lines: allExampleAnnotations, searchShowLinesView: .constant(true), favouriteLines: .constant(exampleLinesString))
         }//showModalPopUp: .constant(true))
     }
 }
