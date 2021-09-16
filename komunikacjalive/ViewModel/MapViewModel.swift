@@ -14,7 +14,7 @@ enum MapDetails {
 }
 
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-    //@Published var lines: [VehicleAnnotation] = [exampleAnnotation1, exampleAnnotation2]
+    
     @Published var region = MKCoordinateRegion(
         center: MapDetails.startingLocation,
         span: MapDetails.defaultSpan)

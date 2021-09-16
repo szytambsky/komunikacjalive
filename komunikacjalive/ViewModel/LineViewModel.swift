@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 class LineViewModel: ObservableObject {
     
@@ -13,15 +14,21 @@ class LineViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
     @Published var favouriteLines = [VehicleAnnotation]()
     @Published var lines = [VehicleAnnotation]()
+    @Published var favouriteLinesName = [String]()
+    
+    //var subscriptions = Set<AnyCancellable>()
     
     // MARK: - TO DO: hide api key
-    let apiKey = "your key"
+    let apiKey = "your api key"
     
     let service: LineService
     
     init(service: LineService = LineService()) {
         self.service = service
         fetchLines()
+        
+        specifyFavouriteLines()
+        //specifyFavouriteLinesBuses()
     }
     
     func fetchLines() {
@@ -50,7 +57,56 @@ class LineViewModel: ObservableObject {
         }
     }
     
+    func specifyFavouriteLines() {
+        $favouriteLinesName
+            .removeDuplicates()
+            .map({ [unowned self] selectedLinesNames in
+                var favLines = [VehicleAnnotation]()
+                for line in selectedLinesNames {
+                    for vehicle in self.lines {
+                        if vehicle.lineName == line {
+                            favLines.append(vehicle)
+                        }
+                    }
+                }
+                return favLines
+            })
+            .assign(to: &$favouriteLines)
+        print(favouriteLines)
+    }
     
+//    func specifyFavouriteLinesBuses() {
+//        $favouriteLinesName
+//            .removeDuplicates()
+//            .compactMap({ [unowned self] selectedLinesNames in
+//                for line in selectedLinesNames {
+//                    for vehicle in self.lines {
+//                        if vehicle.lineName == line {
+//                            self.favouriteLines.append(vehicle)
+//                        }
+//                    }
+//                }
+//                return self.favouriteLines
+//            })
+//            .sink { [unowned self] lines in
+//                DispatchQueue.main.async {
+//                    self.favouriteLines = lines
+//                }
+//            }
+//            .store(in: &subscriptions)
+//        print(favouriteLines)
+//    }
+//        $lines
+//            .map({
+//                for line in $0 {
+//                    if self.favouriteLinesName.contains(line.lineName) {
+//                        self.favouriteLines.append(line)
+//                    }
+//                }
+//                print("DEBUG: \(self.favouriteLines)")
+//                return self.favouriteLines
+//            })
+//            .assign(to: &$favouriteLines)
     
     // MARK: - MOCK DATA
     static func errorState() -> LineViewModel {

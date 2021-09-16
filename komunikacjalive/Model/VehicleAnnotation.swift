@@ -46,7 +46,7 @@ struct VehicleAnnotation: Codable, Identifiable, Hashable {
         case latitude = "Lat"
         case longitude = "Lon"
     }
-    
+}
     // Custom decoding initializer
 //    init(from decoder: Decoder) throws {
 //        let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -58,5 +58,5 @@ struct VehicleAnnotation: Codable, Identifiable, Hashable {
 //        latitude = try values.decode(Double.self, forKey: .latitude)
 //        longitude = try values.decode(Double.self, forKey: .longitude)
 //    }
-}
+
 

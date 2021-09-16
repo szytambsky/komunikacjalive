@@ -10,7 +10,7 @@ import SwiftUI
 struct ModalPopUpView: View {
     @ObservedObject var fetcher: LineViewModel
     
-    var lines: [VehicleAnnotation]
+    //var lines: [VehicleAnnotation]
     //@Binding var showModalPopUp: Bool
     @State private var searchText = ""
     @Binding var searchShowLinesView: Bool
@@ -19,9 +19,9 @@ struct ModalPopUpView: View {
     
     var filteredLines: [VehicleAnnotation] {
         if searchText.count == 0 {
-            return lines
+            return fetcher.lines
         } else {
-            return lines.filter({ $0.lineName.contains(searchText)})
+            return fetcher.lines.filter({ $0.lineName.contains(searchText)})
         }
     }
     
@@ -65,7 +65,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
             Color.black
                 .edgesIgnoringSafeArea(.all)
             
-            ModalPopUpView(fetcher: LineViewModel(service: LineService()), lines: allExampleAnnotations, searchShowLinesView: .constant(true), favouriteLines: .constant(exampleLinesString))
+            ModalPopUpView(fetcher: LineViewModel(service: LineService()), searchShowLinesView: .constant(true), favouriteLines: .constant(exampleLinesString))
         }//showModalPopUp: .constant(true))
     }
 }

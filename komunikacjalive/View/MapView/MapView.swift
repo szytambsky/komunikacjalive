@@ -7,13 +7,18 @@
 
 import MapKit
 import SwiftUI
+import Combine
 
 struct MapView: View {
     @EnvironmentObject private var viewModel: MapViewModel
     @ObservedObject private var fetcher = LineViewModel()
     
     @State private var showSearchLinesView = false
-    @State private var favouriteLines = [String]()
+    
+    //@State private var favLines = [VehicleAnnotation]()
+    var region = MKCoordinateRegion(
+        center: MapDetails.startingLocation,
+        span: MapDetails.defaultSpan)
     
     let screen = UIScreen.main.bounds
     
@@ -22,7 +27,7 @@ struct MapView: View {
             Map(coordinateRegion: $viewModel.region,
                 interactionModes: .all,
                 showsUserLocation: true,
-                annotationItems: fetcher.lines) { item in
+                annotationItems: fetcher.favouriteLines) { item in
                 MapAnnotation(coordinate: item.coordinate) {
                     ZStack {
                         Circle()
@@ -39,7 +44,7 @@ struct MapView: View {
             .onAppear {
                 viewModel.checkIfLocationServicesIsEnabled()
             }
-            
+
             VStack {
                 Spacer()
                 
@@ -58,7 +63,7 @@ struct MapView: View {
                             .padding(.trailing, 16)
                     })
                     .fullScreenCover(isPresented: $showSearchLinesView, content: {
-                        ModalPopUpView(fetcher: fetcher, lines: fetcher.lines, searchShowLinesView: $showSearchLinesView, favouriteLines: $favouriteLines)
+                        ModalPopUpView(fetcher: fetcher, searchShowLinesView: $showSearchLinesView, favouriteLines: $fetcher.favouriteLinesName)// $favouriteLines)
                     })
                 }
                 
@@ -68,6 +73,7 @@ struct MapView: View {
                     withAnimation {
                         viewModel.region.span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
                     }
+                    print(fetcher.favouriteLines)
                 }, label: {
                     Text("Zoom in")
                         .frame(width: screen.width/3)
