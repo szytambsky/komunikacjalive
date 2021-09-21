@@ -14,7 +14,7 @@ struct komunikacjaliveApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(MapViewModel.shared)
+                //.environmentObject(MapViewModel.shared)
                 //.environmentObject(viewModel)
         }
     }

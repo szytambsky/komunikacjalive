@@ -28,6 +28,8 @@
 		C29F5E0F26E19A0F00E3B35B /* SearchLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29F5E0E26E19A0F00E3B35B /* SearchLinesView.swift */; };
 		C2C7C80D26ED7E1F00844546 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C7C80C26ED7E1F00844546 /* ErrorView.swift */; };
 		C2C7C80F26ED7E2500844546 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C7C80E26ED7E2500844546 /* LoadingView.swift */; };
+		C2CEF9A126F397A3001BC244 /* MapViewRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CEF9A026F397A3001BC244 /* MapViewRep.swift */; };
+		C2CEF9A326F39AFA001BC244 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CEF9A226F39AFA001BC244 /* Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		C29F5E0E26E19A0F00E3B35B /* SearchLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLinesView.swift; sourceTree = "<group>"; };
 		C2C7C80C26ED7E1F00844546 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		C2C7C80E26ED7E2500844546 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		C2CEF9A026F397A3001BC244 /* MapViewRep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRep.swift; sourceTree = "<group>"; };
+		C2CEF9A226F39AFA001BC244 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				C29F5DFA26E1923500E3B35B /* SearchLineView */,
+				C2CEF99F26F39795001BC244 /* MapViewRep */,
 				C22A91C826DFAA80007C5AAE /* MapView */,
 				C2C7C80726ED7D9200844546 /* RelatedAPIView */,
 			);
@@ -237,6 +242,15 @@
 				C2C7C80C26ED7E1F00844546 /* ErrorView.swift */,
 			);
 			path = RelatedAPIView;
+			sourceTree = "<group>";
+		};
+		C2CEF99F26F39795001BC244 /* MapViewRep */ = {
+			isa = PBXGroup;
+			children = (
+				C2CEF9A226F39AFA001BC244 /* Home.swift */,
+				C2CEF9A026F397A3001BC244 /* MapViewRep.swift */,
+			);
+			path = MapViewRep;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,7 +389,9 @@
 				C2C7C80F26ED7E2500844546 /* LoadingView.swift in Sources */,
 				C22A91CA26DFAA89007C5AAE /* MapView.swift in Sources */,
 				C22A919526DFAA24007C5AAE /* komunikacjaliveApp.swift in Sources */,
+				C2CEF9A126F397A3001BC244 /* MapViewRep.swift in Sources */,
 				C29F5E0F26E19A0F00E3B35B /* SearchLinesView.swift in Sources */,
+				C2CEF9A326F39AFA001BC244 /* Home.swift in Sources */,
 				C2860D8426E26A79006BF804 /* GlobalHelpers.swift in Sources */,
 				C26A559A26ED678E00199CC6 /* APIError.swift in Sources */,
 				C2165D7E26E6CD2200808E86 /* LineViewModel.swift in Sources */,

@@ -42,7 +42,7 @@ struct MapView: View {
             }
             .accentColor(Color(.systemPink))
             .onAppear {
-                viewModel.checkIfLocationServicesIsEnabled()
+                //viewModel.checkIfLocationServicesIsEnabled()
             }
 
             VStack {

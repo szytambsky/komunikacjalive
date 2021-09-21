@@ -18,7 +18,10 @@ struct VehiclesLocationResult: Codable {
     var result: [VehicleAnnotation]
 }
 
-struct VehicleAnnotation: Codable, Identifiable, Hashable {
+final class VehicleAnnotation: NSObject, Codable, Identifiable, MKAnnotation {
+    
+    //var description: String
+    
     var id = UUID()
     var lineName: String
     var vehicleNumber: String
@@ -28,6 +31,10 @@ struct VehicleAnnotation: Codable, Identifiable, Hashable {
     
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
+    var location: CLLocation {
+        return CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)
     }
     
     var tint: Color {
@@ -46,17 +53,26 @@ struct VehicleAnnotation: Codable, Identifiable, Hashable {
         case latitude = "Lat"
         case longitude = "Lon"
     }
+    
+    init(lineName: String, vehicleNumber: String, brigade: String, latitude: Double, longitude: Double) {
+        self.lineName = lineName
+        self.vehicleNumber = vehicleNumber
+        self.brigade = brigade
+        self.latitude = latitude
+        self.longitude = longitude
+    }
 }
-    // Custom decoding initializer
+
+//    //Custom decoding initializer
 //    init(from decoder: Decoder) throws {
-//        let values = try decoder.container(keyedBy: CodingKeys.self)
+//       let values = try decoder.container(keyedBy: CodingKeys.self)
 //
-//        id = try values.decode(UUID.self, forKey: .id)
-//        lineName = try values.decode(String.self, forKey: .lineName)
-//        vehicleNumber = try values.decode(String.self, forKey: .vehicleNumber)
-//        brigade = try values.decode(String.self, forKey: .brigade)
-//        latitude = try values.decode(Double.self, forKey: .latitude)
-//        longitude = try values.decode(Double.self, forKey: .longitude)
-//    }
+//       //id = try values.decode(UUID.self, forKey: .id)
+//       lineName = try values.decode(String.self, forKey: .lineName)
+//       vehicleNumber = try values.decode(String.self, forKey: .vehicleNumber)
+//       brigade = try values.decode(String.self, forKey: .brigade)
+//       latitude = try values.decode(Double.self, forKey: .latitude)
+//       longitude = try values.decode(Double.self, forKey: .longitude)
+//   }
 
 

@@ -14,15 +14,31 @@ enum MapDetails {
 }
 
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var mapView = MKMapView()
+    @Published var permissionDenied = false
+    @Published var mapType: MKMapType = .standard
     
-    @Published var region = MKCoordinateRegion(
-        center: MapDetails.startingLocation,
-        span: MapDetails.defaultSpan)
+    @Published var region: MKCoordinateRegion!//(center: MapDetails.startingLocation, span: MapDetails.defaultSpan)
     
     // nil => user can turn off location services for whole phone
     var locationManager: CLLocationManager?
     
     static let shared = MapViewModel()
+    
+    func updateMapType() {
+        if mapType == .standard {
+            mapType = .hybrid
+            mapView.mapType = mapType
+        } else {
+            mapType = .standard
+            mapView.mapType = mapType
+        }
+    }
+    
+    func centerUserLocation() {
+        mapView.setRegion(region, animated: true)
+        mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
+    }
     
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
@@ -33,29 +49,36 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
-    private func checkLocationAuthorization() {
-        guard let locationManager = locationManager else { return }
-        
-        switch locationManager.authorizationStatus {
+    // The system calls this method when the app creates the related object’s CLLocationManager instance, and when the app’s authorization status changes.
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        //checkLocationAuthorization()
+        switch manager.authorizationStatus {
             case .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
+                manager.requestWhenInUseAuthorization()
             case .restricted:
                 print("Location is restricted")
             case .denied:
                 print("You have denied this app location permission. Change it in settings")
+                permissionDenied.toggle()
             case .authorizedAlways, .authorizedWhenInUse:
-                if let sourceCoordinates = locationManager.location?.coordinate  {
-                    region = MKCoordinateRegion(
-                        center: sourceCoordinates,
-                        span: MapDetails.defaultSpan)
-                } // else { return }
+                manager.requestLocation()
             @unknown default:
                 break
         }
     }
     
-    // The system calls this method when the app creates the related object’s CLLocationManager instance, and when the app’s authorization status changes.
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkLocationAuthorization()
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    // Getting user Region
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+
+        self.region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 2000, longitudinalMeters: 2000)
+
+        // Updating map & Smooth animations
+        self.mapView.setRegion(self.region, animated: true)
+        self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
     }
 }

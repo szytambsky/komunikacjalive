@@ -11,7 +11,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            MapView()
+            Home()
                 .edgesIgnoringSafeArea(.all)
         }
     }
@@ -24,7 +24,7 @@ struct ContentView_Previews: PreviewProvider {
                 .edgesIgnoringSafeArea(.all)
             
             ContentView()
-                .environmentObject(MapViewModel())
+                //.environmentObject(MapViewModel())
         }
     }
 }

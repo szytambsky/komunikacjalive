@@ -25,7 +25,7 @@ struct MockFunctions {
     
     static func successState() -> LineViewModel {
         let viewModel = LineViewModel()
-        viewModel.lines = [exampleAnnotation1, exampleAnnotation2]
+        viewModel.lines = []//exampleAnnotation1, exampleAnnotation2]
         return viewModel
     }
 }
