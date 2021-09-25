@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StandardLineView: View {
-    var line: VehicleAnnotation?
+    var line: BusAndTram?
     @Binding var favouriteLines: [String]
     
     var body: some View {
@@ -37,6 +37,6 @@ struct StandardLineView: View {
 
 struct StandardLineView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardLineView(line: exampleAnnotation2, favouriteLines: .constant(exampleLinesString))
+        StandardLineView(line: busexample1, favouriteLines: .constant(exampleLinesString))
     }
 }

@@ -16,11 +16,18 @@ struct Home: View {
     
     let screen = UIScreen.main.bounds
     
+    @State var counter = 0
+    let timer = Timer.publish(every: 15, tolerance: 0.5, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         ZStack {
-            MapViewRep(vehicles: $fetcher.favouriteLines)
-                .environmentObject(mapData)
+            // usunac podwojne busesAndTrams i vehiclesDictionary
+            MapViewRep(busesAndTrams: fetcher.favouriteBusesAndTram, vehiclesDictionary: fetcher.vehicleDictionary)
+                //.environmentObject(mapData)
                 .ignoresSafeArea(.all, edges: .all)
+                .onReceive(timer, perform: { time in
+                    fetcher.fetchLines()
+                })
             
             VStack {
                 Spacer()
@@ -64,6 +71,18 @@ struct Home: View {
                                 .clipShape(Circle())
                                 .foregroundColor(.white)
                         })
+                        
+                        Button(action: {
+                            fetcher.fetchLines()
+                        }, label: {
+                            Image(systemName: mapData.mapType == .standard ? "network" : "map")
+                                .font(.title2)
+                                .padding()
+                                .background(Color.graySearchBackground.opacity(0.95))
+                                .clipShape(Circle())
+                                .foregroundColor(.white)
+                        })
+                        
                     }
                 }
                 .padding(.trailing, 16)
@@ -74,7 +93,6 @@ struct Home: View {
                     withAnimation {
                         mapData.region.span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
                     }
-                    print(fetcher.favouriteLines)
                 }, label: {
                     Text("Zoom in")
                         .frame(width: screen.width/3)
@@ -87,9 +105,9 @@ struct Home: View {
                 .foregroundColor(.white)
             }
             
-            if fetcher.isLoading {
-                LoadingView()
-            }
+//            if fetcher.isLoading {
+//                LoadingView()
+//            }
         }
         .onAppear(perform: {
             mapData.checkIfLocationServicesIsEnabled()

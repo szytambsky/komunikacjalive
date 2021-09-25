@@ -7,16 +7,24 @@
 
 import Foundation
 import Combine
+import MapKit
 
 class LineViewModel: ObservableObject {
     
-    @Published var isLoading: Bool = false
+    //@Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
-    @Published var favouriteLines = [VehicleAnnotation]()
-    @Published var lines = [VehicleAnnotation]()
+    //@Published var favouriteLines = [VehicleAnnotation]()
+    //@Published var lines = [VehicleAnnotation]()
     @Published var favouriteLinesName = [String]()
     
+    //
+    @Published var busesAndTrams = [BusAndTram]()
+    // after specyfiying favouriteOnes from busesAndTrams
+    @Published var favouriteBusesAndTram = [BusAndTram]()
+    @Published var vehicleDictionary = [String: VehicleAnnotation]()
+    
     //var subscriptions = Set<AnyCancellable>()
+    static let shared = LineViewModel(service: LineService())
     
     // MARK: - TO DO: hide api key
     let apiKey = "your api key"
@@ -26,23 +34,21 @@ class LineViewModel: ObservableObject {
     init(service: LineService = LineService()) {
         self.service = service
         fetchLines()
-        
-        specifyFavouriteLines()
-        //specifyFavouriteLinesBuses()
+        //specifyFavouriteLines()
     }
     
     func fetchLines() {
-        isLoading = true
-        errorMessage = nil
+        print("Debug: - fetch lines call on timer publisher")
+        //isLoading = true
+        //errorMessage = nil
         
         let urlString = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKey)&type=1"
         let url = URL(string: urlString)
-
-        service.fetchBusAndTramLines(url: url) { [unowned self] lines in
-            
+        
+        service.fetchBusStructModels(url: url) { [unowned self] lines in
             DispatchQueue.main.async {
-                self.isLoading = false
-                
+                //self.isLoading = false
+
                 switch lines {
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -51,7 +57,9 @@ class LineViewModel: ObservableObject {
                         print(error)
                     }
                 case .success(let lines):
-                    self.lines = lines
+                    self.busesAndTrams = lines
+                    specifyFavouriteLines()
+                    print("Debug: busesAndTrams settet")
                 }
             }
         }
@@ -61,9 +69,9 @@ class LineViewModel: ObservableObject {
         $favouriteLinesName
             .removeDuplicates()
             .map({ [unowned self] selectedLinesNames in
-                var favLines = [VehicleAnnotation]()
+                var favLines = [BusAndTram]()
                 for line in selectedLinesNames {
-                    for vehicle in self.lines {
+                    for vehicle in self.busesAndTrams {
                         if vehicle.lineName == line {
                             favLines.append(vehicle)
                         }
@@ -71,42 +79,19 @@ class LineViewModel: ObservableObject {
                 }
                 return favLines
             })
-            .assign(to: &$favouriteLines)
-        print(favouriteLines)
+            .assign(to: &$favouriteBusesAndTram)
+        
+        $favouriteBusesAndTram
+            .removeDuplicates()
+            .map({ favLines in
+                var dict = [String: VehicleAnnotation]()
+                for line in favLines {
+                    dict[line.vehicleNumber] = VehicleAnnotation(lineName: line.lineName, vehicleNumber: line.vehicleNumber, brigade: "", latitude: line.latitude, longitude: line.longitude, coordinate: CLLocationCoordinate2D(latitude: line.latitude, longitude: line.longitude))
+                }
+                return dict
+            })
+            .assign(to: &$vehicleDictionary)
     }
-    
-//    func specifyFavouriteLinesBuses() {
-//        $favouriteLinesName
-//            .removeDuplicates()
-//            .compactMap({ [unowned self] selectedLinesNames in
-//                for line in selectedLinesNames {
-//                    for vehicle in self.lines {
-//                        if vehicle.lineName == line {
-//                            self.favouriteLines.append(vehicle)
-//                        }
-//                    }
-//                }
-//                return self.favouriteLines
-//            })
-//            .sink { [unowned self] lines in
-//                DispatchQueue.main.async {
-//                    self.favouriteLines = lines
-//                }
-//            }
-//            .store(in: &subscriptions)
-//        print(favouriteLines)
-//    }
-//        $lines
-//            .map({
-//                for line in $0 {
-//                    if self.favouriteLinesName.contains(line.lineName) {
-//                        self.favouriteLines.append(line)
-//                    }
-//                }
-//                print("DEBUG: \(self.favouriteLines)")
-//                return self.favouriteLines
-//            })
-//            .assign(to: &$favouriteLines)
     
     // MARK: - MOCK DATA
     static func errorState() -> LineViewModel {
@@ -117,7 +102,7 @@ class LineViewModel: ObservableObject {
     
     static func successState() -> LineViewModel {
         let viewModel = LineViewModel()
-        viewModel.lines = []//exampleAnnotation1, exampleAnnotation2]
+        //viewModel.lines = []//exampleAnnotation1, exampleAnnotation2]
         return viewModel
     }
 }

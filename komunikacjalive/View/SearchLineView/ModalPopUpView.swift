@@ -17,11 +17,11 @@ struct ModalPopUpView: View {
     
     @Binding var favouriteLines: [String]
     
-    var filteredLines: [VehicleAnnotation] {
+    var filteredLines: [BusAndTram] {
         if searchText.count == 0 {
-            return fetcher.lines
+            return fetcher.busesAndTrams
         } else {
-            return fetcher.lines.filter({ $0.lineName.contains(searchText)})
+            return fetcher.busesAndTrams.filter({ $0.lineName.contains(searchText)})
         }
     }
     

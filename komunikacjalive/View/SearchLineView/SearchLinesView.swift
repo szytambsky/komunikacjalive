@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchLinesView: View {
-    var lines: [VehicleAnnotation]
+    var lines: [BusAndTram]
     @Binding var favouriteLines: [String]
     
     let columns: [GridItem] = [
@@ -22,7 +22,7 @@ struct SearchLinesView: View {
     var body: some View {
         VStack {
             LazyVGrid(columns: columns, spacing: 2) {
-                ForEach(lines) { line in
+                ForEach(lines, id: \.self) { line in
                     StandardLineView(line: line, favouriteLines: $favouriteLines)
                 }
             }

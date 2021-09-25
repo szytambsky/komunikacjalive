@@ -7,13 +7,18 @@
 
 import Foundation
 import SwiftUI
-
+import MapKit
 //latitude: 52.235031, longitude: 21.01876)
 
-let exampleAnnotation1 = VehicleAnnotation(lineName: "7", vehicleNumber: "5555", brigade: "7", latitude: 52.235031, longitude: 21.01876)
-let exampleAnnotation2 = VehicleAnnotation(lineName: "520", vehicleNumber: "4444", brigade: "4", latitude: 52.234031, longitude: 21.01976)
+let exampleAnnotation1 = VehicleAnnotation(lineName: "7", vehicleNumber: "5555", brigade: "7", latitude: 52.235031, longitude: 21.01876, coordinate: CLLocationCoordinate2D(latitude: 52.235031, longitude: 21.01876))
+let exampleAnnotation2 = VehicleAnnotation(lineName: "520", vehicleNumber: "4444", brigade: "4", latitude: 52.234031, longitude: 21.01976, coordinate: CLLocationCoordinate2D(latitude: 52.234031, longitude: 21.01976))
 
-let allExampleAnnotations = [exampleAnnotation1, exampleAnnotation2]
+let busexample1 = BusAndTram(lineName: "1", vehicleNumber: "5666", latitude: 52.234031, longitude: 21.0187, oldLatitude: 52.23403, oldLongitude: 21.01876)
+let busexample2 = BusAndTram(lineName: "2", vehicleNumber: "4545", latitude: 52.23031, longitude: 21.187, oldLatitude: 52.2403, oldLongitude: 21.0876)
+
+let allExampleAnnotations = [busexample1, busexample2]
+
+let allExampleAnnotationsOther = [exampleAnnotation1, exampleAnnotation2]
 let exampleLinesString = ["151", "520", "525", "168", "111", "131", "117"]
 
 struct MockFunctions {
@@ -25,7 +30,7 @@ struct MockFunctions {
     
     static func successState() -> LineViewModel {
         let viewModel = LineViewModel()
-        viewModel.lines = []//exampleAnnotation1, exampleAnnotation2]
+        //viewModel.lines = []//exampleAnnotation1, exampleAnnotation2]
         return viewModel
     }
 }

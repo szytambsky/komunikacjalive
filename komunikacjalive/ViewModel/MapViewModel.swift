@@ -24,6 +24,8 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     var locationManager: CLLocationManager?
     
     static let shared = MapViewModel()
+    var oldLocations = [CLLocationCoordinate2D]()
+    var newLocations = [CLLocationCoordinate2D]()
     
     func updateMapType() {
         if mapType == .standard {

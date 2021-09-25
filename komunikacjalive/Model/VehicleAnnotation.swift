@@ -14,13 +14,11 @@ enum VehicleType {
     case tram
 }
 
-struct VehiclesLocationResult: Codable {
+struct VehiclesLocationResult {//}: Codable {
     var result: [VehicleAnnotation]
 }
 
-final class VehicleAnnotation: NSObject, Codable, Identifiable, MKAnnotation {
-    
-    //var description: String
+class VehicleAnnotation: NSObject, Identifiable, MKAnnotation {
     
     var id = UUID()
     var lineName: String
@@ -28,14 +26,13 @@ final class VehicleAnnotation: NSObject, Codable, Identifiable, MKAnnotation {
     var brigade: String
     var latitude: Double
     var longitude: Double
+    var oldLatitude: Double = 0.0
+    var oldLongitude: Double = 0.0
+    var coordinate: CLLocationCoordinate2D
     
-    var coordinate: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
-    
-    var location: CLLocation {
-        return CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)
-    }
+//    var coordinate: CLLocationCoordinate2D {
+//        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//    }
     
     var tint: Color {
         vehicleType == .bus ? .yellow : .red
@@ -47,6 +44,7 @@ final class VehicleAnnotation: NSObject, Codable, Identifiable, MKAnnotation {
     
     enum CodingKeys: String, CodingKey {
         //case id
+        case coordinate = "coordinate"
         case lineName = "Lines"
         case vehicleNumber = "VehicleNumber"
         case brigade = "Brigade"
@@ -54,7 +52,8 @@ final class VehicleAnnotation: NSObject, Codable, Identifiable, MKAnnotation {
         case longitude = "Lon"
     }
     
-    init(lineName: String, vehicleNumber: String, brigade: String, latitude: Double, longitude: Double) {
+    init(lineName: String, vehicleNumber: String, brigade: String, latitude: Double, longitude: Double, coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
         self.lineName = lineName
         self.vehicleNumber = vehicleNumber
         self.brigade = brigade
@@ -62,17 +61,4 @@ final class VehicleAnnotation: NSObject, Codable, Identifiable, MKAnnotation {
         self.longitude = longitude
     }
 }
-
-//    //Custom decoding initializer
-//    init(from decoder: Decoder) throws {
-//       let values = try decoder.container(keyedBy: CodingKeys.self)
-//
-//       //id = try values.decode(UUID.self, forKey: .id)
-//       lineName = try values.decode(String.self, forKey: .lineName)
-//       vehicleNumber = try values.decode(String.self, forKey: .vehicleNumber)
-//       brigade = try values.decode(String.self, forKey: .brigade)
-//       latitude = try values.decode(Double.self, forKey: .latitude)
-//       longitude = try values.decode(Double.self, forKey: .longitude)
-//   }
-
 
