@@ -21,9 +21,8 @@ struct Home: View {
     
     var body: some View {
         ZStack {
-            // usunac podwojne busesAndTrams i vehiclesDictionary
-            MapViewRep(busesAndTrams: fetcher.favouriteBusesAndTram, vehiclesDictionary: fetcher.vehicleDictionary)
-                //.environmentObject(mapData)
+            MapViewRep(busesAndTrams: fetcher.busesAndTrams, vehiclesDictionary: fetcher.vehicleDictionary)
+                .environmentObject(mapData)
                 .ignoresSafeArea(.all, edges: .all)
                 .onReceive(timer, perform: { time in
                     fetcher.fetchLines()
@@ -71,18 +70,6 @@ struct Home: View {
                                 .clipShape(Circle())
                                 .foregroundColor(.white)
                         })
-                        
-                        Button(action: {
-                            fetcher.fetchLines()
-                        }, label: {
-                            Image(systemName: mapData.mapType == .standard ? "network" : "map")
-                                .font(.title2)
-                                .padding()
-                                .background(Color.graySearchBackground.opacity(0.95))
-                                .clipShape(Circle())
-                                .foregroundColor(.white)
-                        })
-                        
                     }
                 }
                 .padding(.trailing, 16)
@@ -105,9 +92,9 @@ struct Home: View {
                 .foregroundColor(.white)
             }
             
-//            if fetcher.isLoading {
-//                LoadingView()
-//            }
+            if fetcher.isLoading {
+                LoadingView()
+            }
         }
         .onAppear(perform: {
             mapData.checkIfLocationServicesIsEnabled()

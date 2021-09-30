@@ -11,7 +11,7 @@ import MapKit
 
 class LineViewModel: ObservableObject {
     
-    //@Published var isLoading: Bool = false
+    @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
     //@Published var favouriteLines = [VehicleAnnotation]()
     //@Published var lines = [VehicleAnnotation]()
@@ -34,20 +34,19 @@ class LineViewModel: ObservableObject {
     init(service: LineService = LineService()) {
         self.service = service
         fetchLines()
-        //specifyFavouriteLines()
     }
     
     func fetchLines() {
         print("Debug: - fetch lines call on timer publisher")
-        //isLoading = true
-        //errorMessage = nil
+        isLoading = true
+        errorMessage = nil
         
         let urlString = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKey)&type=1"
         let url = URL(string: urlString)
         
         service.fetchBusStructModels(url: url) { [unowned self] lines in
             DispatchQueue.main.async {
-                //self.isLoading = false
+                self.isLoading = false
 
                 switch lines {
                 case .failure(let error):
@@ -59,7 +58,6 @@ class LineViewModel: ObservableObject {
                 case .success(let lines):
                     self.busesAndTrams = lines
                     specifyFavouriteLines()
-                    print("Debug: busesAndTrams settet")
                 }
             }
         }
@@ -86,7 +84,7 @@ class LineViewModel: ObservableObject {
             .map({ favLines in
                 var dict = [String: VehicleAnnotation]()
                 for line in favLines {
-                    dict[line.vehicleNumber] = VehicleAnnotation(lineName: line.lineName, vehicleNumber: line.vehicleNumber, brigade: "", latitude: line.latitude, longitude: line.longitude, coordinate: CLLocationCoordinate2D(latitude: line.latitude, longitude: line.longitude))
+                    dict[line.vehicleNumber] = VehicleAnnotation(lineName: line.lineName, vehicleNumber: line.vehicleNumber, brigade: "", latitude: line.latitude, longitude: line.longitude, coordinate: CLLocationCoordinate2D(latitude: line.latitude, longitude: line.longitude), title: line.lineName, subtitle: line.vehicleNumber)
                 }
                 return dict
             })

@@ -24,3 +24,15 @@ extension Double {
 struct Constant {
     static let truncateValue = 6
 }
+
+extension UIImage {
+    
+    /// Convert a label to an image
+    class func imageFromLabel(label: UILabel) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(label.bounds.size, false, 0.0)
+        label.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
+    }
+}

@@ -14,10 +14,6 @@ enum VehicleType {
     case tram
 }
 
-struct VehiclesLocationResult {//}: Codable {
-    var result: [VehicleAnnotation]
-}
-
 class VehicleAnnotation: NSObject, Identifiable, MKAnnotation {
     
     var id = UUID()
@@ -28,11 +24,11 @@ class VehicleAnnotation: NSObject, Identifiable, MKAnnotation {
     var longitude: Double
     var oldLatitude: Double = 0.0
     var oldLongitude: Double = 0.0
-    var coordinate: CLLocationCoordinate2D
     
-//    var coordinate: CLLocationCoordinate2D {
-//        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-//    }
+    // inherit from MKAnnotation
+    dynamic var coordinate: CLLocationCoordinate2D
+    dynamic var title: String?
+    dynamic var subtitle: String?
     
     var tint: Color {
         vehicleType == .bus ? .yellow : .red
@@ -52,13 +48,15 @@ class VehicleAnnotation: NSObject, Identifiable, MKAnnotation {
         case longitude = "Lon"
     }
     
-    init(lineName: String, vehicleNumber: String, brigade: String, latitude: Double, longitude: Double, coordinate: CLLocationCoordinate2D) {
+    init(lineName: String, vehicleNumber: String, brigade: String, latitude: Double, longitude: Double, coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
         self.coordinate = coordinate
         self.lineName = lineName
         self.vehicleNumber = vehicleNumber
         self.brigade = brigade
         self.latitude = latitude
         self.longitude = longitude
+        self.title = lineName
+        self.subtitle = vehicleNumber
     }
 }
 
