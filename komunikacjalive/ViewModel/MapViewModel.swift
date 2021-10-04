@@ -23,7 +23,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     // nil => user can turn off location services for whole phone
     var locationManager: CLLocationManager?
     
-    static let shared = MapViewModel()
+    //static let shared = MapViewModel()
     var oldLocations = [CLLocationCoordinate2D]()
     var newLocations = [CLLocationCoordinate2D]()
     

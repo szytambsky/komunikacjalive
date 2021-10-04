@@ -11,7 +11,7 @@ struct BusAndTramResult: Codable {
     var result: [BusAndTram]
 }
 
-struct BusAndTram: Codable, Hashable {
+struct BusAndTram: Codable, Hashable, Equatable {
     var lineName: String = ""
     var vehicleNumber: String
     var latitude: Double = 0.0

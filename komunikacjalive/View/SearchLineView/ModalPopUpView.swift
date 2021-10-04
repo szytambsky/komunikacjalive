@@ -13,7 +13,7 @@ struct ModalPopUpView: View {
     //var lines: [VehicleAnnotation]
     //@Binding var showModalPopUp: Bool
     @State private var searchText = ""
-    @Binding var searchShowLinesView: Bool
+    @Binding var showSearchLinesView: Bool
     
     @Binding var favouriteLines: [String]
     
@@ -21,7 +21,8 @@ struct ModalPopUpView: View {
         if searchText.count == 0 {
             return fetcher.busesAndTrams
         } else {
-            return fetcher.busesAndTrams.filter({ $0.lineName.contains(searchText)})
+            let arr = fetcher.busesAndTrams.unique(map: { $0.lineName })
+            return arr.filter({ $0.lineName.contains(searchText)})
         }
     }
     
@@ -34,7 +35,7 @@ struct ModalPopUpView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        searchShowLinesView = false
+                        showSearchLinesView = false
                     }, label: {
                         Image(systemName: "xmark.circle")
                             .font(.system(size: 34))
@@ -65,7 +66,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
             Color.black
                 .edgesIgnoringSafeArea(.all)
             
-            ModalPopUpView(fetcher: LineViewModel(service: LineService()), searchShowLinesView: .constant(true), favouriteLines: .constant(exampleLinesString))
+            ModalPopUpView(fetcher: LineViewModel(service: LineService()), showSearchLinesView: .constant(true), favouriteLines: .constant(exampleLinesString))
         }//showModalPopUp: .constant(true))
     }
 }

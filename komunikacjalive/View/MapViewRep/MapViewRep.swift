@@ -65,7 +65,6 @@ struct MapViewRep: UIViewRepresentable {
             let getAngle = self.angleFromCoordinate(firstCoordinate: oldLocation, secondCoordinate: newLocation)
 
             myAnnotation.coordinate = newLocation
-            myAnnotation.lineLabel.text = myAnnotation.title
             let annotationView = mapView.view(for: myAnnotation)
             annotationView?.transform = CGAffineTransform(rotationAngle: CGFloat(getAngle))
             //busesAndTrams = []
@@ -76,7 +75,7 @@ struct MapViewRep: UIViewRepresentable {
     func angleFromCoordinate(firstCoordinate: CLLocationCoordinate2D, secondCoordinate: CLLocationCoordinate2D) -> Double {
         let deltaLongitude: Double = secondCoordinate.longitude - firstCoordinate.longitude
         let deltaLatitude: Double = secondCoordinate.latitude - firstCoordinate.latitude
-        let angle = (Double.pi * 0.5) - atan(deltaLatitude / deltaLongitude)
+        let angle = -(Double.pi * 0.5) - atan(deltaLatitude / deltaLongitude)
         
         if (deltaLongitude > 0) {
             return angle
@@ -123,7 +122,7 @@ struct MapViewRep: UIViewRepresentable {
             let rect1 = CGRect(x: 0, y: 0, width: Int(image.size.width)/5, height: Int(image.size.height)/5)
             image.draw(in: rect1)
             
-            let rect2 = CGRect(x: 0, y: Int(titleImage.size.height)/3, width: Int(titleImage.size.width), height: Int(titleImage.size.height))
+            let rect2 = CGRect(x: 0, y: Int(titleImage.size.height)/2, width: Int(titleImage.size.width), height: Int(titleImage.size.height))
             titleImage.draw(in: rect2)
             
             let combinedImage = UIGraphicsGetImageFromCurrentImageContext()

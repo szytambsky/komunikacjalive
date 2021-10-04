@@ -23,13 +23,13 @@ class LineViewModel: ObservableObject {
     @Published var favouriteBusesAndTram = [BusAndTram]()
     @Published var vehicleDictionary = [String: VehicleAnnotation]()
     
-    //var subscriptions = Set<AnyCancellable>()
-    static let shared = LineViewModel(service: LineService())
+    //static let shared = LineViewModel(service: LineService())
     
     // MARK: - TO DO: hide api key
     let apiKey = "your api key"
     
     let service: LineService
+    var subscriptions = Set<AnyCancellable>()
     
     init(service: LineService = LineService()) {
         self.service = service
@@ -44,23 +44,22 @@ class LineViewModel: ObservableObject {
         let urlString = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKey)&type=1"
         let url = URL(string: urlString)
         
-        service.fetchBusStructModels(url: url) { [unowned self] lines in
-            DispatchQueue.main.async {
+        service.fetchVehicles(url: url)
+            .receive(on: DispatchQueue.main)
+            .sink { [unowned self] completion in
                 self.isLoading = false
-
-                switch lines {
+                
+                switch completion {
                 case .failure(let error):
-                    DispatchQueue.main.async {
-                        errorMessage = error.localizedDescription
-                        //print(error.description)
-                        print(error)
-                    }
-                case .success(let lines):
-                    self.busesAndTrams = lines
-                    specifyFavouriteLines()
+                    self.errorMessage = error.localizedDescription
+                    print(errorMessage as Any)
+                case .finished:
+                    print("Publisher stopped observing")
                 }
-            }
-        }
+            } receiveValue: { [unowned self] lines in
+                self.busesAndTrams = lines
+                specifyFavouriteLines()
+            }.store(in: &subscriptions)
     }
     
     func specifyFavouriteLines() {
@@ -104,3 +103,22 @@ class LineViewModel: ObservableObject {
         return viewModel
     }
 }
+
+////  Networking with completion without Combine Framework
+//        service.fetchBusStructModels(url: url) { [unowned self] lines in
+//            DispatchQueue.main.async {
+//                self.isLoading = false
+//
+//                switch lines {
+//                case .failure(let error):
+//                    DispatchQueue.main.async {
+//                        errorMessage = error.localizedDescription
+//                        //print(error.description)
+//                        print(error)
+//                    }
+//                case .success(let lines):
+//                    self.busesAndTrams = lines
+//                    specifyFavouriteLines()
+//                }
+//            }
+//        }
