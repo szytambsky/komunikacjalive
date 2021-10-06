@@ -41,12 +41,14 @@ class LineViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
         
-        let urlString = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKey)&type=1"
-        let url = URL(string: urlString)
+        let urlTramsString = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=f2e5503e-927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKey)&type=2"
+        let urlBusesString = "https://api.um.warszawa.pl/api/action/busestrams_get/?resource_id=%20f2e5503e927d-4ad3-9500-4ab9e55deb59&apikey=\(apiKey)&type=1"
+        let urlTrams = URL(string: urlTramsString)
+        let urlBuses = URL(string: urlBusesString)
         
-        service.fetchVehicles(url: url)
+        service.fetchLines(urlBuses: urlBuses, urlTrams: urlTrams)
             .receive(on: DispatchQueue.main)
-            .sink { [unowned self] completion in
+            .sink { [unowned self]  completion in
                 self.isLoading = false
                 
                 switch completion {
@@ -60,6 +62,25 @@ class LineViewModel: ObservableObject {
                 self.busesAndTrams = lines
                 specifyFavouriteLines()
             }.store(in: &subscriptions)
+
+//        service.fetchBuses(url: url)
+//            .receive(on: DispatchQueue.main)
+//            //.collect()
+//            .sink { [unowned self] completion in
+//                self.isLoading = false
+//
+//                switch completion {
+//                case .failure(let error):
+//                    self.errorMessage = error.localizedDescription
+//                    print(errorMessage as Any)
+//                case .finished:
+//                    print("Publisher stopped observing")
+//                }
+//            } receiveValue: { [unowned self] lines in
+//                self.busesAndTrams = lines
+//                //self.busesAndTrams.append(lines)
+//                specifyFavouriteLines()
+//            }.store(in: &subscriptions)
     }
     
     func specifyFavouriteLines() {

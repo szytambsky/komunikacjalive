@@ -27,8 +27,6 @@ struct Home: View {
                 .onReceive(timer, perform: { time in
                     fetcher.fetchLines()
                 })
-                //.overlay(Color.clear)
-            
             
             VStack {
                 HStack {
@@ -36,9 +34,9 @@ struct Home: View {
                         mapData.centerUserLocation()
                     }, label: {
                         ZStack {
-                            Color.green
+                            Color.white.opacity(0.44)
                                 .frame(width: 64, height: 64)
-                                .foregroundColor(.green)
+                                .foregroundColor(.white.opacity(0.44))
                                 .clipShape(Circle())
                                 .padding()
                                 
@@ -60,7 +58,7 @@ struct Home: View {
                 
                 RightPanelButtons(fetcher: fetcher, showSearchLinesView: $showSearchLinesView, favouriteLines: $fetcher.favouriteLinesName)
                     .environmentObject(mapData)
-                .padding(.trailing, 16)
+                    .padding(.trailing, 16)
                 
                 Spacer()
                 

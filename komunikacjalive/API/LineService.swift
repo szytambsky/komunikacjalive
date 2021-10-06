@@ -10,11 +10,27 @@ import Combine
 
 struct LineService {
     
-    func fetchVehicles(url: URL?) -> AnyPublisher<[BusAndTram], Error> {
+    func fetchBuses(url: URL?) -> AnyPublisher<[BusAndTram], Error> {
         return URLSession.shared.dataTaskPublisher(for: url!)
             .map { $0.data }
             .decode(type: BusAndTramResult.self, decoder: JSONDecoder())
             .map { $0.result }
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchTrams(url: URL?) -> AnyPublisher<[BusAndTram], Error> {
+        return URLSession.shared.dataTaskPublisher(for: url!)
+            .map { $0.data }
+            .decode(type: BusAndTramResult.self, decoder: JSONDecoder())
+            .map { $0.result }
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchLines(urlBuses: URL?, urlTrams: URL?) -> AnyPublisher<[BusAndTram], Error> {
+        return Publishers.Zip(fetchBuses(url: urlBuses), fetchTrams(url: urlTrams))
+            .map { lines -> [BusAndTram] in
+                return (lines.0 + lines.1)//.sorted { $0.lineNumber < $1.lineNumber }
+            }
             .eraseToAnyPublisher()
     }
     

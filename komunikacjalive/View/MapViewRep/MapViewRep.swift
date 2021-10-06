@@ -109,7 +109,7 @@ struct MapViewRep: UIViewRepresentable {
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
             label.numberOfLines = 1
             label.textAlignment = .center
-            label.textColor = UIColor.white
+            label.textColor = UIColor.systemYellow
             label.text = title
             label.font = UIFont(name: "HelveticaNeue-Bold", size: 16.0)
             let titleImage = UIImage.imageFromLabel(label: label)

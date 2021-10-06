@@ -13,6 +13,11 @@ struct ContentView: View {
         ZStack {
             Home()
                 .edgesIgnoringSafeArea(.all)
+//                .overlay (
+//                    Color.clear // Or any view or color // I put clear here because I prefer to put a blur in this case. This modifier and the material it contains are optional.
+//                    .edgesIgnoringSafeArea(.top)
+//                    .frame(height: 0)
+//                )
         }
     }
 }
