@@ -35,3 +35,8 @@ struct MockFunctions {
     }
 }
 
+let onboardingFeatures = [
+    Feature(title: "Zacznij już dziś", subtitle: "Miej swoje autobusy zawsze na wyciągniecie ręki", image: "bus-front"),
+    Feature(title: "Bądź na czas", subtitle: "Dostęp ułatwi Ci proszuanie się po mieście", image: "bus-inside"),
+    Feature(title: "Rozpocznij z nami", subtitle: "Najwygodniejsze narzędzie czeka", image: "bus-middle")
+]

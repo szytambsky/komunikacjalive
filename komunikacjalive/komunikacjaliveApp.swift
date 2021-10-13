@@ -9,13 +9,18 @@ import SwiftUI
 
 @main
 struct komunikacjaliveApp: App {
+    @AppStorage("isOnboarding") var isOnboarding = true
     //@StateObject var viewModel = MapViewModel()
-    
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                //.environmentObject(MapViewModel.shared)
-                //.environmentObject(viewModel)
+            if isOnboarding {
+                OnboardingContainerView()
+            } else {
+                ContentView()
+                    //.environmentObject(MapViewModel.shared)
+                    //.environmentObject(viewModel)
+            }
         }
     }
 }

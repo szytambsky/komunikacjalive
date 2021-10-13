@@ -30,7 +30,7 @@ struct StandardLineView: View {
                     .bold()
                     .font(.system(size: 24))
                     .foregroundColor(.black)
-                    .animation(.default)
+                    //.animation(.default)
             }
         }
     }

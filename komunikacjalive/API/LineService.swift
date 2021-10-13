@@ -29,7 +29,7 @@ struct LineService {
     func fetchLines(urlBuses: URL?, urlTrams: URL?) -> AnyPublisher<[BusAndTram], Error> {
         return Publishers.Zip(fetchBuses(url: urlBuses), fetchTrams(url: urlTrams))
             .map { lines -> [BusAndTram] in
-                return (lines.0 + lines.1)//.sorted { $0.lineNumber < $1.lineNumber }
+                return (lines.0 + lines.1)//.sorted { $0.lineName < $1.lineName }
             }
             .eraseToAnyPublisher()
     }

@@ -15,8 +15,15 @@
 		C22A91A726DFAA25007C5AAE /* komunikacjaliveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22A91A626DFAA25007C5AAE /* komunikacjaliveTests.swift */; };
 		C22A91B226DFAA25007C5AAE /* komunikacjaliveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22A91B126DFAA25007C5AAE /* komunikacjaliveUITests.swift */; };
 		C22A91CA26DFAA89007C5AAE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22A91C926DFAA89007C5AAE /* MapView.swift */; };
+		C241E68E27161DE500F6F5F7 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C241E68D27161DE500F6F5F7 /* SideMenuView.swift */; };
+		C241E692271623F000F6F5F7 /* SideMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C241E691271623F000F6F5F7 /* SideMenuHeaderView.swift */; };
+		C241E6942716279D00F6F5F7 /* SideMenuViewOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = C241E6932716279D00F6F5F7 /* SideMenuViewOption.swift */; };
+		C241E6962716297F00F6F5F7 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C241E6952716297F00F6F5F7 /* SideMenuCell.swift */; };
 		C246C7FA26E0F2CF00D9F693 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C246C7F926E0F2CF00D9F693 /* MockData.swift */; };
 		C246C80226E1057400D9F693 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C246C80126E1057400D9F693 /* MapViewModel.swift */; };
+		C24FEA80270FA30000B61F79 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24FEA7F270FA30000B61F79 /* OnboardingContainerView.swift */; };
+		C24FEA82270FA30E00B61F79 /* OnboardingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24FEA81270FA30E00B61F79 /* OnboardingContentView.swift */; };
+		C24FEA84270FA52300B61F79 /* OnboardingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24FEA83270FA52300B61F79 /* OnboardingFeature.swift */; };
 		C2588F8426DFBD2B00574135 /* VehicleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */; };
 		C260568826FB74A400A7CF63 /* BusAndTram.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260568726FB74A400A7CF63 /* BusAndTram.swift */; };
 		C260568C26FBBAC000A7CF63 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260568B26FBBAC000A7CF63 /* AnnotationView.swift */; };
@@ -66,8 +73,15 @@
 		C22A91B126DFAA25007C5AAE /* komunikacjaliveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = komunikacjaliveUITests.swift; sourceTree = "<group>"; };
 		C22A91B326DFAA25007C5AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C22A91C926DFAA89007C5AAE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		C241E68D27161DE500F6F5F7 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		C241E691271623F000F6F5F7 /* SideMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuHeaderView.swift; sourceTree = "<group>"; };
+		C241E6932716279D00F6F5F7 /* SideMenuViewOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewOption.swift; sourceTree = "<group>"; };
+		C241E6952716297F00F6F5F7 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		C246C7F926E0F2CF00D9F693 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		C246C80126E1057400D9F693 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		C24FEA7F270FA30000B61F79 /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
+		C24FEA81270FA30E00B61F79 /* OnboardingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentView.swift; sourceTree = "<group>"; };
+		C24FEA83270FA52300B61F79 /* OnboardingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFeature.swift; sourceTree = "<group>"; };
 		C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleAnnotation.swift; sourceTree = "<group>"; };
 		C260568726FB74A400A7CF63 /* BusAndTram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusAndTram.swift; sourceTree = "<group>"; };
 		C260568B26FBBAC000A7CF63 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
@@ -186,6 +200,8 @@
 		C22A91C326DFAA5A007C5AAE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C241E68C27161CAB00F6F5F7 /* SideMenu */,
+				C24FEA7A270F5AFE00B61F79 /* Onboarding */,
 				C29F5DFA26E1923500E3B35B /* SearchLineView */,
 				C2CEF99F26F39795001BC244 /* MapViewRep */,
 				C22A91C826DFAA80007C5AAE /* MapView */,
@@ -211,6 +227,17 @@
 			path = MapView;
 			sourceTree = "<group>";
 		};
+		C241E68C27161CAB00F6F5F7 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				C241E68D27161DE500F6F5F7 /* SideMenuView.swift */,
+				C241E691271623F000F6F5F7 /* SideMenuHeaderView.swift */,
+				C241E6932716279D00F6F5F7 /* SideMenuViewOption.swift */,
+				C241E6952716297F00F6F5F7 /* SideMenuCell.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
 		C246C7F826E0F2A700D9F693 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +246,24 @@
 				C2860D8326E26A78006BF804 /* GlobalHelpers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C24FEA7A270F5AFE00B61F79 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				C24FEA85270FAB1A00B61F79 /* OnboardingModel */,
+				C24FEA7F270FA30000B61F79 /* OnboardingContainerView.swift */,
+				C24FEA81270FA30E00B61F79 /* OnboardingContentView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		C24FEA85270FAB1A00B61F79 /* OnboardingModel */ = {
+			isa = PBXGroup;
+			children = (
+				C24FEA83270FA52300B61F79 /* OnboardingFeature.swift */,
+			);
+			path = OnboardingModel;
 			sourceTree = "<group>";
 		};
 		C26A559626ED55DB00199CC6 /* API */ = {
@@ -388,16 +433,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C241E6942716279D00F6F5F7 /* SideMenuViewOption.swift in Sources */,
 				C22A919726DFAA24007C5AAE /* ContentView.swift in Sources */,
+				C241E692271623F000F6F5F7 /* SideMenuHeaderView.swift in Sources */,
 				C26A559826ED55EF00199CC6 /* LineService.swift in Sources */,
 				C2860D7126E2487C006BF804 /* Colors.swift in Sources */,
 				C2588F8426DFBD2B00574135 /* VehicleAnnotation.swift in Sources */,
 				C2C7C80F26ED7E2500844546 /* LoadingView.swift in Sources */,
 				C22A91CA26DFAA89007C5AAE /* MapView.swift in Sources */,
 				C22A919526DFAA24007C5AAE /* komunikacjaliveApp.swift in Sources */,
+				C241E68E27161DE500F6F5F7 /* SideMenuView.swift in Sources */,
 				C2CEF9A126F397A3001BC244 /* MapViewRep.swift in Sources */,
 				C29F5E0F26E19A0F00E3B35B /* SearchLinesView.swift in Sources */,
+				C24FEA84270FA52300B61F79 /* OnboardingFeature.swift in Sources */,
+				C24FEA80270FA30000B61F79 /* OnboardingContainerView.swift in Sources */,
 				C2CEF9A326F39AFA001BC244 /* Home.swift in Sources */,
+				C241E6962716297F00F6F5F7 /* SideMenuCell.swift in Sources */,
 				C260568C26FBBAC000A7CF63 /* AnnotationView.swift in Sources */,
 				C2860D8426E26A79006BF804 /* GlobalHelpers.swift in Sources */,
 				C26A559A26ED678E00199CC6 /* APIError.swift in Sources */,
@@ -409,6 +460,7 @@
 				C2860D7626E25085006BF804 /* SearchBar.swift in Sources */,
 				C246C80226E1057400D9F693 /* MapViewModel.swift in Sources */,
 				C2C7C80D26ED7E1F00844546 /* ErrorView.swift in Sources */,
+				C24FEA82270FA30E00B61F79 /* OnboardingContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@ import MapKit
 enum MapDetails {
     static let startingLocation = CLLocationCoordinate2D(latitude: 52.237049, longitude: 21.01753)
     static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    static let regionInMeters = CLLocationDistance(2000)
 }
 
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
@@ -37,11 +38,6 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
-    func centerUserLocation() {
-        mapView.setRegion(region, animated: true)
-        mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
-    }
-    
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
@@ -63,9 +59,17 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
                 print("You have denied this app location permission. Change it in settings")
                 permissionDenied.toggle()
             case .authorizedAlways, .authorizedWhenInUse:
-                manager.requestLocation()
+                //manager.requestLocation()
+                centerViewOnUserLocation()
             @unknown default:
                 break
+        }
+    }
+    
+    func centerViewOnUserLocation() {
+        if let location = locationManager?.location?.coordinate {
+            region = MKCoordinateRegion.init(center: location, latitudinalMeters: MapDetails.regionInMeters, longitudinalMeters: MapDetails.regionInMeters)
+            self.mapView.setRegion(region, animated: true)
         }
     }
     
@@ -77,10 +81,11 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
 
-        self.region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 2000, longitudinalMeters: 2000)
+        self.region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: MapDetails.regionInMeters, longitudinalMeters: MapDetails.regionInMeters)
 
         // Updating map & Smooth animations
         self.mapView.setRegion(self.region, animated: true)
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
     }
+    
 }
