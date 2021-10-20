@@ -9,11 +9,11 @@ import SwiftUI
 
 struct SideMenuView: View {
     @Binding var isShowing: Bool
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color.white, Color.white]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
+            colorScheme == .dark ? Color.black : Color.white
             
             VStack {
                 SideMenuHeaderView(isShowing: $isShowing)
@@ -28,6 +28,7 @@ struct SideMenuView: View {
                 
                 Spacer()
             }
+            .padding(.top, 44)
         }
     }
 }
@@ -42,7 +43,7 @@ extension SideMenuView {
     
     func getDestination(forOption option: SideMenuViewOption) -> AnyView {
         switch option {
-        case .moreinfo: return AnyView(Text(option.title))
+        case .moreinfo: return AnyView(ExampleView())//AnyView(Text(option.title))
         case .author: return AnyView(Text(option.title))
         }
     }

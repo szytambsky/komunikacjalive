@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct SideMenuCell: View {
+    @Environment(\.colorScheme) var colorScheme
     let option: SideMenuViewOption
     
     var body: some View {
         HStack(spacing: 16) {
             Button {
-                // action
+                // action dont needed if navigation link available
             } label: {
                 Image(systemName: option.imageName)
                     .frame(width: 24, height: 24)
@@ -23,7 +24,7 @@ struct SideMenuCell: View {
             
             Spacer()
         }
-        .foregroundColor(.black)
+        .foregroundColor(colorScheme == .dark ? .white : .black)
         .padding()
     }
 }

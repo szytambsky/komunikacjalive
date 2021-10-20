@@ -8,25 +8,31 @@
 import SwiftUI
 
 struct SideMenuHeaderView: View {
+    @Environment(\.colorScheme) var colorScheme
     @Binding var isShowing: Bool
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        ZStack(alignment: .trailing) {
             HStack {
+                Text("Komunikacja wersja 1.0")
+                    .font(.system(size: 18, weight: .bold))
+                    .padding(.leading, 12)
+                
                 Spacer()
-//                Button(action: {
-//                    withAnimation(.spring()) {
-//                        isShowing.toggle()
-//                    }
-//                }, label: {
-//                    Image(systemName: "xmark")
-//                        .frame(width: 32, height: 32)
-//                        .foregroundColor(.black)
-//                        .padding()
-//                })
+                
+                Button(action: {
+                    withAnimation(.spring()) {
+                        isShowing.toggle()
+                    }
+                }, label: {
+                    Image(systemName: "xmark")
+                        .frame(width: 32, height: 32)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                        .padding()
+                })
             }
         }
-        .foregroundColor(.black)
+        .foregroundColor(colorScheme == .dark ? .white : .black)
     }
 }
 

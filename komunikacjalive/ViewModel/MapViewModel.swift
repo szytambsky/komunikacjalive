@@ -42,6 +42,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             locationManager?.delegate = self
+            //centerViewOnUserLocation()
         } else {
             print("Show an alert letting user now location services for whole phone are off")
         }
@@ -70,6 +71,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         if let location = locationManager?.location?.coordinate {
             region = MKCoordinateRegion.init(center: location, latitudinalMeters: MapDetails.regionInMeters, longitudinalMeters: MapDetails.regionInMeters)
             self.mapView.setRegion(region, animated: true)
+            self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
         }
     }
     

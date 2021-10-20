@@ -18,14 +18,6 @@ struct BusAndTram: Codable, Hashable, Equatable {
     var longitude: Double = 0.0
     var oldLatitude: Double = 0.0
     var oldLongitude: Double = 0.0
-    //var coordinate: CLLocationCoordinate2D
-    
-//    init(lineName: String, latitude: Double, longitude: Double) {//, coordinate: CLLocationCoordinate2D) {
-//        self.lineName = lineName
-//        self.latitude = latitude
-//        self.longitude = longitude
-//        //self.coordinate = coordinate
-//    }
     
     enum CodingKeys: String, CodingKey {
         case lineName = "Lines"

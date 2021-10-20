@@ -17,7 +17,6 @@ struct StandardLineView: View {
                 Button(action: {
                     favouriteLines.append(line.lineName)
                     favouriteLines = Array(Set(favouriteLines))
-                    print(favouriteLines)
                 }, label: {
                     Circle()
                         .strokeBorder(Color.red, lineWidth: 4)

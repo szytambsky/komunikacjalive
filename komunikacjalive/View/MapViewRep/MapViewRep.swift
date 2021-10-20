@@ -11,10 +11,8 @@ import MapKit
 struct MapViewRep: UIViewRepresentable {
     @EnvironmentObject private var mapData: MapViewModel
     
-    // Thanks to Combine these ones are favouriteLines
-    //@Binding var vehicles: [VehicleAnnotation]
     var busesAndTrams: [BusAndTram]
-    var vehiclesDictionary: [String: VehicleAnnotation]
+    var vehicleDictionary: [String: VehicleAnnotation]
     
     //www.hackingwithswift.com/quick-start/swiftui/how-to-fix-cannot-assign-to-property-self-is-immutable
     @State private var oldCoordinates = [String: Double]()
@@ -34,17 +32,17 @@ struct MapViewRep: UIViewRepresentable {
     }
    
     func updateUIView(_ view: MKMapView, context: Context) {
-        print("updating")
         let oldAnnotations = view.annotations
         view.removeAnnotations(oldAnnotations)
-        
-        //if !busesAndTrams.isEmpty && !vehiclesDictionary.isEmpty {
-        for key in vehiclesDictionary.keys {
-            if let myAnnotation: VehicleAnnotation = vehiclesDictionary[key] {
-                let ann = myAnnotation
-                view.addAnnotation(ann)
+        //view.addAnnotations(Array(vehicleDictionary.values))
+
+        for key in vehicleDictionary.keys {
+            print(key)
+            if let myAnnotation: VehicleAnnotation = vehicleDictionary[key] {
+                view.addAnnotation(myAnnotation)
                 for model in busesAndTrams {
                     if model.vehicleNumber == key {
+                        print(model.vehicleNumber)
                         DispatchQueue.main.async {
                             updateLocationOnMap(model: model, myAnnotation: myAnnotation, mapView: view)
                             let oldCord = model.latitude
@@ -65,8 +63,10 @@ struct MapViewRep: UIViewRepresentable {
             let getAngle = self.angleFromCoordinate(firstCoordinate: oldLocation, secondCoordinate: newLocation)
 
             myAnnotation.coordinate = newLocation
-            let annotationView = mapView.view(for: myAnnotation)
-            annotationView?.transform = CGAffineTransform(rotationAngle: CGFloat(getAngle))
+            let annotationView = mapView.view(for: myAnnotation) as? AnnotationView
+            //annotationView?.transform = CGAffineTransform(rotationAngle: CGFloat(getAngle))
+            
+            annotationView?.btnInfo?.transform = CGAffineTransform(rotationAngle: CGFloat(getAngle))
             //busesAndTrams = []
             //vehiclesDictionary = [:]
         }
@@ -94,14 +94,90 @@ struct MapViewRep: UIViewRepresentable {
             if annotation is MKUserLocation {
                 return nil
             } else {
-                let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
-                let imageForAnnotation = UIImage(named: "autobus")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
-                let annotationTitle = annotation.title!
-                annotationView.image = combineImageAndTitle(image: imageForAnnotation, title: annotationTitle!)
-                return annotationView
+                
+                let identifier: String = "CustomViewAnnotation"
+                
+                var annotView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? AnnotationView
+                annotView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                
+                let pinIcon = UIImage(named: "autobus")
+                //let pinIcon = UIImage(systemName: "arrowtriangle.down.fill")
+                annotView?.btnInfo = UIButton()
+                annotView?.frame = CGRect(x: 0, y: 0, width: pinIcon!.size.width/4, height: pinIcon!.size.height/4)
+                annotView?.btnInfo?.frame = annotView?.frame ?? CGRect.zero
+                annotView?.btnInfo?.setBackgroundImage(pinIcon, for: .normal)
+                annotView?.addSubview(annotView?.btnInfo ?? UIButton())
+                let annotationLabel = UILabel(frame: CGRect(x: 19.5, y: 19.5, width: 26, height: 26))
+                annotationLabel.numberOfLines = 0
+                annotationLabel.textAlignment = .center
+                annotationLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+                annotationLabel.text = annotation.title!
+                annotationLabel.textColor = .red
+                annotationLabel.backgroundColor = .yellow
+                annotationLabel.layer.cornerRadius = (annotationLabel.frame.width/2)
+                annotationLabel.layer.masksToBounds = true
+                annotationLabel.layer.borderWidth = 2
+                annotationLabel.layer.borderColor = UIColor.white.cgColor
+                annotView?.addSubview(annotationLabel)
+                
+                return annotView
             }
-            
         }
+        
+//        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//            if annotation is MKUserLocation {
+//                return nil
+//            } else {
+//                let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+//                let imageForAnnotation = UIImage(named: "autobus")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
+//                let annotationTitle = annotation.title!
+//                annotationView.image = combineImageAndTitle(image: imageForAnnotation, title: annotationTitle!)
+//                return annotationView
+//            }
+//        }
+//
+//        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//
+//            if annotation.isKind(of: MKUserLocation.self) {
+//                return nil
+//            } else {
+//
+//                let identifier: String = "CustomViewAnnotation"
+//
+//                var annotView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? AnnotationView
+//
+//                if let annotationView = annotView {
+//                    return annotationView
+//
+//                } else {// nil
+//
+//                    annotView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
+//
+//                    let pinIcon = UIImage(named: "autobus")
+//                    //let pinIcon = UIImage(systemName: "arrowtriangle.down.fill")
+//                    annotView?.btnInfo = UIButton()
+//                    annotView?.frame = CGRect(x: 0, y: 0, width: pinIcon!.size.width/4, height: pinIcon!.size.height/4)
+//                    annotView?.btnInfo?.frame = annotView?.frame ?? CGRect.zero
+//                    annotView?.btnInfo?.setBackgroundImage(pinIcon, for: .normal)
+//                    annotView?.addSubview(annotView?.btnInfo ?? UIButton())
+//
+//                    let annotationLabel = UILabel(frame: CGRect(x: 19.5, y: 19.5, width: 26, height: 26))
+//                    annotationLabel.numberOfLines = 0
+//                    annotationLabel.textAlignment = .center
+//                    annotationLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+//                    annotationLabel.text = annotation.title!
+//                    annotationLabel.textColor = .red
+//                    annotationLabel.backgroundColor = .yellow
+//                    annotationLabel.layer.cornerRadius = (annotationLabel.frame.width/2)
+//                    annotationLabel.layer.masksToBounds = true
+//                    annotationLabel.layer.borderWidth = 2
+//                    annotationLabel.layer.borderColor = UIColor.white.cgColor
+//                    annotView?.addSubview(annotationLabel)
+//
+//                    return annotView
+//                }
+//            }
+//        }
         
         /// Combine image and title in one image.
         func combineImageAndTitle(image: UIImage, title: String) -> UIImage {
@@ -131,18 +207,3 @@ struct MapViewRep: UIViewRepresentable {
         }
     }
 }
-
-//let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
-//annotationView.image = UIImage(named: "autobus")?.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
-//let size = CGSize(width: 42, height: 42)
-//annotationView.image = UIGraphicsImageRenderer(size: size).image(actions: { _ in
-//    annotationView.image?.draw(in: CGRect(origin: .zero, size: size))
-//})
-//return annotationView
-
-//let pinnedImage = UIImage(named: "autobus")
-//annotationView?.vehicleButton = UIButton()
-//annotationView?.frame = CGRect(x: 0, y: 0, width: (pinnedImage?.size.width)!, height: (pinnedImage?.size.height)!)
-//annotationView?.vehicleButton?.frame = annotationView?.frame ?? CGRect.zero
-//annotationView?.vehicleButton?.setBackgroundImage(pinnedImage, for: .normal)
-//annotationView?.addSubview(annotationView?.vehicleButton ?? UIButton())

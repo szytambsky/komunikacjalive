@@ -15,8 +15,7 @@ enum VehicleType {
 }
 
 class VehicleAnnotation: NSObject, Identifiable, MKAnnotation {
-    
-    var id = UUID()
+    //var id = UUID()
     var lineName: String
     var vehicleNumber: String
     var brigade: String
@@ -26,9 +25,9 @@ class VehicleAnnotation: NSObject, Identifiable, MKAnnotation {
     var oldLongitude: Double = 0.0
     
     // inherit from MKAnnotation
-    dynamic var coordinate: CLLocationCoordinate2D
-    dynamic var title: String?
-    dynamic var subtitle: String?
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var subtitle: String?
     
     var tint: Color {
         vehicleType == .bus ? .yellow : .red
@@ -57,6 +56,8 @@ class VehicleAnnotation: NSObject, Identifiable, MKAnnotation {
         self.longitude = longitude
         self.title = lineName
         self.subtitle = vehicleNumber
+        
+        super.init()
     }
 }
 

@@ -15,7 +15,7 @@ struct komunikacjaliveApp: App {
     var body: some Scene {
         WindowGroup {
             if isOnboarding {
-                OnboardingContainerView()
+                OnboardingContainerView(isOnboarding: $isOnboarding)
             } else {
                 ContentView()
                     //.environmentObject(MapViewModel.shared)

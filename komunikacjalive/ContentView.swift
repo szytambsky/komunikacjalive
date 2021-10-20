@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isNavigationBarHidden = true
     
     var body: some View {
         ZStack {
-            Home()
-                .edgesIgnoringSafeArea(.all)
-//                .overlay (
-//                    Color.clear // Or any view or color // I put clear here because I prefer to put a blur in this case. This modifier and the material it contains are optional.
-//                    .edgesIgnoringSafeArea(.top)
-//                    .frame(height: 0)
-//                )
+            NavigationView {
+                Home()
+                    .navigationBarTitle("", displayMode: .inline)
+                    .navigationBarHidden(self.isNavigationBarHidden)
+                    .onAppear(perform: {
+                        self.isNavigationBarHidden = true
+                    })
+            }
         }
     }
 }

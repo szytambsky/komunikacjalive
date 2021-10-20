@@ -26,7 +26,6 @@
 		C24FEA84270FA52300B61F79 /* OnboardingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24FEA83270FA52300B61F79 /* OnboardingFeature.swift */; };
 		C2588F8426DFBD2B00574135 /* VehicleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */; };
 		C260568826FB74A400A7CF63 /* BusAndTram.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260568726FB74A400A7CF63 /* BusAndTram.swift */; };
-		C260568C26FBBAC000A7CF63 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260568B26FBBAC000A7CF63 /* AnnotationView.swift */; };
 		C26A559826ED55EF00199CC6 /* LineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A559726ED55EF00199CC6 /* LineService.swift */; };
 		C26A559A26ED678E00199CC6 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A559926ED678E00199CC6 /* APIError.swift */; };
 		C2860D6926E243D0006BF804 /* ModalPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2860D6826E243D0006BF804 /* ModalPopUpView.swift */; };
@@ -37,8 +36,11 @@
 		C29F5E0F26E19A0F00E3B35B /* SearchLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29F5E0E26E19A0F00E3B35B /* SearchLinesView.swift */; };
 		C2C7C80D26ED7E1F00844546 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C7C80C26ED7E1F00844546 /* ErrorView.swift */; };
 		C2C7C80F26ED7E2500844546 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C7C80E26ED7E2500844546 /* LoadingView.swift */; };
+		C2CC359E27176BA90065B6DD /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC359D27176BA90065B6DD /* ExampleView.swift */; };
 		C2CEF9A126F397A3001BC244 /* MapViewRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CEF9A026F397A3001BC244 /* MapViewRep.swift */; };
 		C2CEF9A326F39AFA001BC244 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CEF9A226F39AFA001BC244 /* Home.swift */; };
+		C2FB99B9271E1CCC00523488 /* BusAndTramMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FB99B8271E1CCC00523488 /* BusAndTramMarkerView.swift */; };
+		C2FB99BB271ED6A900523488 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FB99BA271ED6A900523488 /* AnnotationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +86,6 @@
 		C24FEA83270FA52300B61F79 /* OnboardingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFeature.swift; sourceTree = "<group>"; };
 		C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleAnnotation.swift; sourceTree = "<group>"; };
 		C260568726FB74A400A7CF63 /* BusAndTram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusAndTram.swift; sourceTree = "<group>"; };
-		C260568B26FBBAC000A7CF63 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		C26A559726ED55EF00199CC6 /* LineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineService.swift; sourceTree = "<group>"; };
 		C26A559926ED678E00199CC6 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		C2860D6826E243D0006BF804 /* ModalPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPopUpView.swift; sourceTree = "<group>"; };
@@ -95,8 +96,11 @@
 		C29F5E0E26E19A0F00E3B35B /* SearchLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLinesView.swift; sourceTree = "<group>"; };
 		C2C7C80C26ED7E1F00844546 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		C2C7C80E26ED7E2500844546 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		C2CC359D27176BA90065B6DD /* ExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleView.swift; sourceTree = "<group>"; };
 		C2CEF9A026F397A3001BC244 /* MapViewRep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRep.swift; sourceTree = "<group>"; };
 		C2CEF9A226F39AFA001BC244 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		C2FB99B8271E1CCC00523488 /* BusAndTramMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusAndTramMarkerView.swift; sourceTree = "<group>"; };
+		C2FB99BA271ED6A900523488 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,9 +194,10 @@
 		C22A91C226DFAA51007C5AAE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */,
 				C260568726FB74A400A7CF63 /* BusAndTram.swift */,
-				C260568B26FBBAC000A7CF63 /* AnnotationView.swift */,
+				C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */,
+				C2FB99BA271ED6A900523488 /* AnnotationView.swift */,
+				C2FB99BC271EE7BC00523488 /* Archival */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				C241E691271623F000F6F5F7 /* SideMenuHeaderView.swift */,
 				C241E6932716279D00F6F5F7 /* SideMenuViewOption.swift */,
 				C241E6952716297F00F6F5F7 /* SideMenuCell.swift */,
+				C2CC359D27176BA90065B6DD /* ExampleView.swift */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -251,9 +257,9 @@
 		C24FEA7A270F5AFE00B61F79 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				C24FEA85270FAB1A00B61F79 /* OnboardingModel */,
 				C24FEA7F270FA30000B61F79 /* OnboardingContainerView.swift */,
 				C24FEA81270FA30E00B61F79 /* OnboardingContentView.swift */,
+				C24FEA85270FAB1A00B61F79 /* OnboardingModel */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -302,6 +308,14 @@
 				C2CEF9A026F397A3001BC244 /* MapViewRep.swift */,
 			);
 			path = MapViewRep;
+			sourceTree = "<group>";
+		};
+		C2FB99BC271EE7BC00523488 /* Archival */ = {
+			isa = PBXGroup;
+			children = (
+				C2FB99B8271E1CCC00523488 /* BusAndTramMarkerView.swift */,
+			);
+			path = Archival;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,20 +451,22 @@
 				C22A919726DFAA24007C5AAE /* ContentView.swift in Sources */,
 				C241E692271623F000F6F5F7 /* SideMenuHeaderView.swift in Sources */,
 				C26A559826ED55EF00199CC6 /* LineService.swift in Sources */,
+				C2FB99BB271ED6A900523488 /* AnnotationView.swift in Sources */,
 				C2860D7126E2487C006BF804 /* Colors.swift in Sources */,
 				C2588F8426DFBD2B00574135 /* VehicleAnnotation.swift in Sources */,
 				C2C7C80F26ED7E2500844546 /* LoadingView.swift in Sources */,
 				C22A91CA26DFAA89007C5AAE /* MapView.swift in Sources */,
 				C22A919526DFAA24007C5AAE /* komunikacjaliveApp.swift in Sources */,
 				C241E68E27161DE500F6F5F7 /* SideMenuView.swift in Sources */,
+				C2CC359E27176BA90065B6DD /* ExampleView.swift in Sources */,
 				C2CEF9A126F397A3001BC244 /* MapViewRep.swift in Sources */,
 				C29F5E0F26E19A0F00E3B35B /* SearchLinesView.swift in Sources */,
 				C24FEA84270FA52300B61F79 /* OnboardingFeature.swift in Sources */,
 				C24FEA80270FA30000B61F79 /* OnboardingContainerView.swift in Sources */,
 				C2CEF9A326F39AFA001BC244 /* Home.swift in Sources */,
 				C241E6962716297F00F6F5F7 /* SideMenuCell.swift in Sources */,
-				C260568C26FBBAC000A7CF63 /* AnnotationView.swift in Sources */,
 				C2860D8426E26A79006BF804 /* GlobalHelpers.swift in Sources */,
+				C2FB99B9271E1CCC00523488 /* BusAndTramMarkerView.swift in Sources */,
 				C26A559A26ED678E00199CC6 /* APIError.swift in Sources */,
 				C2165D7E26E6CD2200808E86 /* LineViewModel.swift in Sources */,
 				C246C7FA26E0F2CF00D9F693 /* MockData.swift in Sources */,

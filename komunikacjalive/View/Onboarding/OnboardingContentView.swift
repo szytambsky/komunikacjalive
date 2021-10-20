@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct OnboardingContentView: View {
-    @AppStorage("isOnboarding") var isOnboarding: Bool?
     var feature: Feature
+    @Binding var isOnboarding: Bool
     
     let screen = UIScreen.main.bounds
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            //LinearGradient(gradient: Gradient(colors: [Color.white, Color.yellow]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            Color.white
+            
             VStack {
                 Spacer()
 
@@ -24,15 +26,19 @@ struct OnboardingContentView: View {
                     .scaledToFill()
                     .clipShape(Circle())
                     .frame(width: screen.width / 1.5, height: screen.width / 1.5)
+                    .shadow(color: .gray, radius: 3, x: 0, y: 3)
                 
                 Spacer()
                 
-                VStack(spacing: 20) {
+                VStack(spacing: 12) {
                     Text(feature.title)
-                        .font(.system(size: 24, weight: .bold))
+                        .font(.headline)
                     Text(feature.subtitle)
                         .font(.callout)
                 }
+                //.multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundColor(.black)
                 .padding()
                 
                 Spacer()
@@ -41,22 +47,24 @@ struct OnboardingContentView: View {
                     isOnboarding = false
                 }, label: {
                     Text("Zaczynam")
+                        .frame(width: screen.width/3)
+                        .font(.headline)
                         .padding()
-                        .background(
-                            Capsule().strokeBorder(Color.white, lineWidth: 1.5)
-                                .frame(width: 120)
-                        )
+                        .background(Color.black)
+                        .clipShape(Capsule())
+                        .shadow(color: .gray, radius: 2, x: 0, y: 2)
                 })
                 
                 Spacer()
             }
+            .foregroundColor(.white)
         }
-        .edgesIgnoringSafeArea(.all)
+        .ignoresSafeArea()
     }
 }
 
 struct OnboardingContentView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingContentView(feature: onboardingFeatures[0])
+        OnboardingContentView(feature: onboardingFeatures[0], isOnboarding: .constant(true))
     }
 }
