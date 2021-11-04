@@ -28,6 +28,8 @@ struct MapViewRep: UIViewRepresentable {
         //let view = MapViewModel.shared.mapView
         view.showsUserLocation = true
         view.delegate = context.coordinator
+        // If we declare an MKAnnotationView in other class file and override MKAnnotation we have to register it here not in view for
+        view.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         return view
     }
    
@@ -55,6 +57,8 @@ struct MapViewRep: UIViewRepresentable {
             }
         }
     }
+    
+    
     
     func updateLocationOnMap(model: BusAndTram, myAnnotation: VehicleAnnotation, mapView: MKMapView) {
         if let oldCoordinates = oldCoordinates[model.vehicleNumber], let oldCoordinates2 = oldCoordinates2[model.vehicleNumber] {
@@ -119,6 +123,7 @@ struct MapViewRep: UIViewRepresentable {
                 annotationLabel.layer.borderWidth = 2
                 annotationLabel.layer.borderColor = UIColor.white.cgColor
                 annotView?.addSubview(annotationLabel)
+                annotView?.clusteringIdentifier = "bus"
                 
                 return annotView
             }
