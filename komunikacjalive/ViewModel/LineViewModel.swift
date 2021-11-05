@@ -28,7 +28,7 @@ class LineViewModel: ObservableObject {
     //static let shared = LineViewModel(service: LineService())
     
     // MARK: - TO DO: hide api key
-    let apiKey = "yuor api key"
+    let apiKey = "your api key"
     
     let service: LineService
     var subscriptions = Set<AnyCancellable>()

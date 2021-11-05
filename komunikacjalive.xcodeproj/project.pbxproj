@@ -40,6 +40,7 @@
 		C2CC359E27176BA90065B6DD /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CC359D27176BA90065B6DD /* ExampleView.swift */; };
 		C2CEF9A126F397A3001BC244 /* MapViewRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CEF9A026F397A3001BC244 /* MapViewRep.swift */; };
 		C2CEF9A326F39AFA001BC244 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CEF9A226F39AFA001BC244 /* Home.swift */; };
+		C2F10DA427358F54006DD5F4 /* InformationAboutAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F10DA327358F54006DD5F4 /* InformationAboutAnnotations.swift */; };
 		C2FB99B9271E1CCC00523488 /* BusAndTramMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FB99B8271E1CCC00523488 /* BusAndTramMarkerView.swift */; };
 		C2FB99BB271ED6A900523488 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FB99BA271ED6A900523488 /* AnnotationView.swift */; };
 /* End PBXBuildFile section */
@@ -101,6 +102,7 @@
 		C2CC359D27176BA90065B6DD /* ExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleView.swift; sourceTree = "<group>"; };
 		C2CEF9A026F397A3001BC244 /* MapViewRep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRep.swift; sourceTree = "<group>"; };
 		C2CEF9A226F39AFA001BC244 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		C2F10DA327358F54006DD5F4 /* InformationAboutAnnotations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InformationAboutAnnotations.swift; path = ../InformationAboutAnnotations.swift; sourceTree = "<group>"; };
 		C2FB99B8271E1CCC00523488 /* BusAndTramMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusAndTramMarkerView.swift; sourceTree = "<group>"; };
 		C2FB99BA271ED6A900523488 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -316,6 +318,7 @@
 		C2FB99BC271EE7BC00523488 /* Archival */ = {
 			isa = PBXGroup;
 			children = (
+				C2F10DA327358F54006DD5F4 /* InformationAboutAnnotations.swift */,
 				C2FB99B8271E1CCC00523488 /* BusAndTramMarkerView.swift */,
 			);
 			path = Archival;
@@ -451,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C241E6942716279D00F6F5F7 /* SideMenuViewOption.swift in Sources */,
+				C2F10DA427358F54006DD5F4 /* InformationAboutAnnotations.swift in Sources */,
 				C22A919726DFAA24007C5AAE /* ContentView.swift in Sources */,
 				C241E692271623F000F6F5F7 /* SideMenuHeaderView.swift in Sources */,
 				C26A559826ED55EF00199CC6 /* LineService.swift in Sources */,

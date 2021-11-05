@@ -19,7 +19,8 @@ struct StandardLineView: View {
                     favouriteLines = Array(Set(favouriteLines))
                 }, label: {
                     Circle()
-                        .strokeBorder(Color.red, lineWidth: 4)
+                        .strokeBorder(line.lineName.count > 2 ? Color(UIColor(named: "busCol")!) : Color(UIColor(named: "tramCol")!), lineWidth: 3)
+                        //.strokeBorder(Color.red, lineWidth: 4)
                         .background(Circle().foregroundColor(.white))
                         .frame(width: 65, height: 65)
                         .padding(4)

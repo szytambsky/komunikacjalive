@@ -29,7 +29,8 @@ struct MapViewRep: UIViewRepresentable {
         view.showsUserLocation = true
         view.delegate = context.coordinator
         // If we declare an MKAnnotationView in other class file and override MKAnnotation we have to register it here not in view for
-        view.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        //view.register(AnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        view.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: "cluster")
         return view
     }
    
@@ -97,37 +98,53 @@ struct MapViewRep: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             if annotation is MKUserLocation {
                 return nil
-            } else {
+            } else if let cluster = annotation as? MKClusterAnnotation {
+                var view = mapView.dequeueReusableAnnotationView(withIdentifier: "cluster") as? ClusterView
+                if view == nil {
+                    view = ClusterView(annotation: cluster, reuseIdentifier: "cluster")
+                }
+                return view
+            } else if let vehicle = annotation as? VehicleAnnotation {
+                let identifier: String = "marker"
                 
-                let identifier: String = "CustomViewAnnotation"
-                
-                var annotView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? AnnotationView
-                annotView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                
-                let pinIcon = UIImage(named: "autobus")
-                //let pinIcon = UIImage(systemName: "arrowtriangle.down.fill")
-                annotView?.btnInfo = UIButton()
-                annotView?.frame = CGRect(x: 0, y: 0, width: pinIcon!.size.width/4, height: pinIcon!.size.height/4)
-                annotView?.btnInfo?.frame = annotView?.frame ?? CGRect.zero
-                annotView?.btnInfo?.setBackgroundImage(pinIcon, for: .normal)
-                annotView?.addSubview(annotView?.btnInfo ?? UIButton())
-                let annotationLabel = UILabel(frame: CGRect(x: 19.5, y: 19.5, width: 26, height: 26))
-                annotationLabel.numberOfLines = 0
-                annotationLabel.textAlignment = .center
-                annotationLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-                annotationLabel.text = annotation.title!
-                annotationLabel.textColor = .red
-                annotationLabel.backgroundColor = .yellow
-                annotationLabel.layer.cornerRadius = (annotationLabel.frame.width/2)
-                annotationLabel.layer.masksToBounds = true
-                annotationLabel.layer.borderWidth = 2
-                annotationLabel.layer.borderColor = UIColor.white.cgColor
-                annotView?.addSubview(annotationLabel)
-                annotView?.clusteringIdentifier = "bus"
-                
-                return annotView
+                if vehicle.vehicleType == .bus {
+                    return customizeVehicleAnnotationView(annotation: vehicle, identifier: identifier, mapView: mapView, colorName: "busCol")
+                } else if vehicle.vehicleType == .tram {
+                    return customizeVehicleAnnotationView(annotation: vehicle, identifier: identifier, mapView: mapView, colorName: "tramCol")
+                }
             }
+            
+            return nil
         }
+        
+        func customizeVehicleAnnotationView(annotation: VehicleAnnotation, identifier: String, mapView: MKMapView, colorName: String) -> MKAnnotationView? {
+            var annotView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? AnnotationView
+            annotView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            
+            let pinIcon = UIImage(named: "autobus")
+            //let pinIcon = UIImage(systemName: "arrowtriangle.down.fill")
+            annotView?.btnInfo = UIButton()
+            annotView?.frame = CGRect(x: 0, y: 0, width: pinIcon!.size.width/4, height: pinIcon!.size.height/4)
+            annotView?.btnInfo?.frame = annotView?.frame ?? CGRect.zero
+            annotView?.btnInfo?.setBackgroundImage(pinIcon, for: .normal)
+            annotView?.addSubview(annotView?.btnInfo ?? UIButton())
+            let annotationLabel = UILabel(frame: CGRect(x: 19.5, y: 19.5, width: 26, height: 26))
+            annotationLabel.numberOfLines = 0
+            annotationLabel.textAlignment = .center
+            annotationLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+            annotationLabel.text = annotation.title!
+            annotationLabel.textColor = .red
+            annotationLabel.backgroundColor = UIColor(named: colorName)
+            annotationLabel.layer.cornerRadius = (annotationLabel.frame.width/2)
+            annotationLabel.layer.masksToBounds = true
+            annotationLabel.layer.borderWidth = 2
+            annotationLabel.layer.borderColor = UIColor.white.cgColor
+            annotView?.addSubview(annotationLabel)
+            annotView?.clusteringIdentifier = "bus"
+            
+            return annotView
+        }
+        
         
 //        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 //            if annotation is MKUserLocation {
@@ -210,5 +227,6 @@ struct MapViewRep: UIViewRepresentable {
             UIGraphicsEndImageContext()
             return combinedImage!
         }
+        
     }
 }

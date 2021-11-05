@@ -19,6 +19,7 @@ class ClusterView: MKAnnotationView {
         displayPriority = .defaultHigh
         collisionMode = .circle
         centerOffset = CGPoint(x: 0, y: -10) // Offset center point to animate better with marker annotations
+        //clusteringIdentifier = "cluster"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,9 +31,9 @@ class ClusterView: MKAnnotationView {
             if let cluster = newValue as? MKClusterAnnotation {
                 let renderer = UIGraphicsImageRenderer(size: CGSize(width: 40, height: 40))
                 let count = cluster.memberAnnotations.count
-//                let uniCount = cluster.memberAnnotations.filter { member -> Bool in
-//                    return (member as! Bike).type == .unicycle
-//                }.count
+                let uniCount = cluster.memberAnnotations.filter { member -> Bool in
+                    return (member as! VehicleAnnotation).vehicleType == .bus
+                }.count
                 image = renderer.image { _ in
                     // Fill full circle with tricycle color
                     UIColor(named: "tramCol")?.setFill()
@@ -41,9 +42,9 @@ class ClusterView: MKAnnotationView {
                     // Fill pie with unicycle color
                     UIColor(named: "busCol")?.setFill()
                     let piePath = UIBezierPath()
-//                    piePath.addArc(withCenter: CGPoint(x: 20, y: 20), radius: 20,
-//                                   startAngle: 0, endAngle: (CGFloat.pi * 2.0 * CGFloat(uniCount)) / CGFloat(count),
-//                                   clockwise: true)
+                    piePath.addArc(withCenter: CGPoint(x: 20, y: 20), radius: 20,
+                                   startAngle: 0, endAngle: (CGFloat.pi * 2.0 * CGFloat(uniCount)) / CGFloat(count),
+                                   clockwise: true)
                     piePath.addLine(to: CGPoint(x: 20, y: 20))
                     piePath.close()
                     piePath.fill()
