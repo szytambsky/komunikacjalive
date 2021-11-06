@@ -40,12 +40,10 @@ struct MapViewRep: UIViewRepresentable {
         //view.addAnnotations(Array(vehicleDictionary.values))
 
         for key in vehicleDictionary.keys {
-            print(key)
             if let myAnnotation: VehicleAnnotation = vehicleDictionary[key] {
                 view.addAnnotation(myAnnotation)
                 for model in busesAndTrams {
                     if model.vehicleNumber == key {
-                        print(model.vehicleNumber)
                         DispatchQueue.main.async {
                             updateLocationOnMap(model: model, myAnnotation: myAnnotation, mapView: view)
                             let oldCord = model.latitude
@@ -69,12 +67,21 @@ struct MapViewRep: UIViewRepresentable {
 
             myAnnotation.coordinate = newLocation
             let annotationView = mapView.view(for: myAnnotation) as? AnnotationView
+            let imageBeforeRotation = annotationView?.image
+            let imageAfterRotation = imageBeforeRotation?.rotate(radians: Float(CGFloat(getAngle)))
+            annotationView?.image = imageAfterRotation
+            annotationView?.frame = CGRect(x: 0, y: 0, width: 64, height: 64)
             //annotationView?.transform = CGAffineTransform(rotationAngle: CGFloat(getAngle))
-            
-            annotationView?.btnInfo?.transform = CGAffineTransform(rotationAngle: CGFloat(getAngle))
+            //annotationView?.btnInfo?.transform = CGAffineTransform(rotationAngle: CGFloat(getAngle))
+            //annotationView?.image?.ciImage?.transformed(by: CGAffineTransform(rotationAngle: CGFloat(getAngle)))
             //busesAndTrams = []
             //vehiclesDictionary = [:]
         }
+    }
+    
+    func boundingRectAfterRotatingRect(rect: CGRect, toAngle radians: CGFloat) -> CGRect {
+        let xfrm = CGAffineTransform(rotationAngle: radians)
+        return rect.applying(xfrm)
     }
     
     func angleFromCoordinate(firstCoordinate: CLLocationCoordinate2D, secondCoordinate: CLLocationCoordinate2D) -> Double {
@@ -123,12 +130,13 @@ struct MapViewRep: UIViewRepresentable {
             
             let pinIcon = UIImage(named: "autobus")
             //let pinIcon = UIImage(systemName: "arrowtriangle.down.fill")
-            annotView?.btnInfo = UIButton()
-            annotView?.frame = CGRect(x: 0, y: 0, width: pinIcon!.size.width/4, height: pinIcon!.size.height/4)
-            annotView?.btnInfo?.frame = annotView?.frame ?? CGRect.zero
-            annotView?.btnInfo?.setBackgroundImage(pinIcon, for: .normal)
-            annotView?.addSubview(annotView?.btnInfo ?? UIButton())
-            let annotationLabel = UILabel(frame: CGRect(x: 19.5, y: 19.5, width: 26, height: 26))
+            annotView?.image = pinIcon
+            annotView?.backgroundColor = .yellow
+            //annotView?.frame = CGRect(x: 0, y: 0, width: pinIcon!.size.width/4, height: pinIcon!.size.height/4)
+            annotView?.frame = CGRect(x: 0, y: 0, width: 64, height: 64)
+            
+            let annotationLabel = UILabel(frame: CGRect(x: pinIcon!.size.width/13, y: pinIcon!.size.width/12, width: 26, height: 26)) // change to height
+            annotationLabel.backgroundColor = .blue
             annotationLabel.numberOfLines = 0
             annotationLabel.textAlignment = .center
             annotationLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
@@ -141,10 +149,21 @@ struct MapViewRep: UIViewRepresentable {
             annotationLabel.layer.borderColor = UIColor.white.cgColor
             annotView?.addSubview(annotationLabel)
             annotView?.clusteringIdentifier = "bus"
+            //annotView?.rightCalloutAccessoryView = annotView?.btnInfo
+            annotView?.canShowCallout = true
             
             return annotView
         }
         
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            if let annotationTitle = view.annotation?.title {
+                print("User tapped on annotation with title: \(annotationTitle!)")
+            }
+        }
+        
+        @objc func normalTap(_ sender: UIGestureRecognizer, mapView: MKMapView, annotationView: AnnotationView) {
+            
+        }
         
 //        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 //            if annotation is MKUserLocation {
@@ -176,7 +195,6 @@ struct MapViewRep: UIViewRepresentable {
 //                    annotView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
 //
 //                    let pinIcon = UIImage(named: "autobus")
-//                    //let pinIcon = UIImage(systemName: "arrowtriangle.down.fill")
 //                    annotView?.btnInfo = UIButton()
 //                    annotView?.frame = CGRect(x: 0, y: 0, width: pinIcon!.size.width/4, height: pinIcon!.size.height/4)
 //                    annotView?.btnInfo?.frame = annotView?.frame ?? CGRect.zero
