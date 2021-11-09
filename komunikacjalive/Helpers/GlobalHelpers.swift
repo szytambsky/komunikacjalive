@@ -7,6 +7,20 @@
 
 import Foundation
 import SwiftUI
+import Combine
+
+// Saving @Published into UserDefaults in SwiftUI or UIKit
+private var cancellables = [String:AnyCancellable]()
+
+extension Published {
+    init(wrappedValue defaultValue: Value, key: String) {
+        let value = UserDefaults.standard.object(forKey: key) as? Value ?? defaultValue
+        self.init(initialValue: value)
+        cancellables[key] = projectedValue.sink { val in
+            UserDefaults.standard.set(val, forKey: key)
+        }
+    }
+}
 
 extension View {
     func hideKeyboard() {

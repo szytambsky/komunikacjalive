@@ -29,7 +29,9 @@ struct LineService {
     func fetchLines(urlBuses: URL?, urlTrams: URL?) -> AnyPublisher<[BusAndTram], Error> {
         return Publishers.Zip(fetchBuses(url: urlBuses), fetchTrams(url: urlTrams))
             .map { lines -> [BusAndTram] in
-                return (lines.0 + lines.1)//.sorted { $0.lineName < $1.lineName }
+                let lines = lines.0 + lines.1
+                return lines//.sorted {$0.lineName.localizedStandardCompare($1.lineName) == .orderedAscending}
+                //return (lines.0 + lines.1).sorted { $0.lineName < $1.lineName }
             }
             .eraseToAnyPublisher()
     }

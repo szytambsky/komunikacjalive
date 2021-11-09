@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import MapKit
+import SwiftUI
 
 class LineViewModel: ObservableObject {
     
@@ -15,9 +16,8 @@ class LineViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
     //@Published var favouriteLines = [VehicleAnnotation]()
     //@Published var lines = [VehicleAnnotation]()
-    @Published var favouriteLinesName = [String]()
+    @Published(key: "favouriteLinesName") var favouriteLinesName = [String]()
     
-    //
     @Published var busesAndTrams = [BusAndTram]()
     // after specyfiying favouriteOnes from busesAndTrams
     @Published var favouriteBusesAndTram = [BusAndTram]()
@@ -28,7 +28,7 @@ class LineViewModel: ObservableObject {
     //static let shared = LineViewModel(service: LineService())
     
     // MARK: - TO DO: hide api key
-    let apiKey = "your api key"
+    let apiKey = "d6879599-0251-48ec-8255-8eca1412a91a"
     
     let service: LineService
     var subscriptions = Set<AnyCancellable>()

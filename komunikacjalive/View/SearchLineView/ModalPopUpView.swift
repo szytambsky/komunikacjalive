@@ -19,9 +19,9 @@ struct ModalPopUpView: View {
     
     var filteredLines: [BusAndTram] {
         if searchText.count == 0 {
-            return fetcher.busesAndTrams
+            return fetcher.busesAndTrams.sorted {$0.lineName.localizedStandardCompare($1.lineName) == .orderedAscending}.unique(map: { $0.lineName })
         } else {
-            let arr = fetcher.busesAndTrams.unique(map: { $0.lineName })
+            let arr = fetcher.busesAndTrams.sorted {$0.lineName.localizedStandardCompare($1.lineName) == .orderedAscending}.unique(map: { $0.lineName })
             return arr.filter({ $0.lineName.contains(searchText)})
         }
     }
