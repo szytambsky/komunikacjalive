@@ -13,7 +13,9 @@ struct SideMenuView: View {
     
     var body: some View {
         ZStack {
-            colorScheme == .dark ? Color.black : Color.white
+            //colorScheme == .dark ? Color.black : Color.white
+            LinearGradient(gradient: Gradient(colors: [Color(UIColor(named: "lightBlue")!), Color(UIColor(named: "tramCol")!)]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
             
             VStack {
                 SideMenuHeaderView(isShowing: $isShowing)

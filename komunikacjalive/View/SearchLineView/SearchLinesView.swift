@@ -23,7 +23,11 @@ struct SearchLinesView: View {
         VStack {
             LazyVGrid(columns: columns, spacing: 2) {
                 ForEach(lines, id: \.self) { line in
-                    StandardLineView(line: line, favouriteLines: $favouriteLines)
+                    StandardLineView(line: line, favouriteLines: $favouriteLines) {
+                        self.favouriteLines.append(line.lineName)
+                        self.favouriteLines = Array(Set(favouriteLines))
+                        print(favouriteLines)
+                    }
                 }
             }
             
@@ -31,13 +35,6 @@ struct SearchLinesView: View {
         }
     }
     
-}
-
-extension Sequence where Element: Hashable {
-    func uniqued() -> [Element] {
-        var set = Set<Element>()
-        return filter { set.insert($0).inserted }
-    }
 }
 
 struct SearchLinesView_Previews: PreviewProvider {

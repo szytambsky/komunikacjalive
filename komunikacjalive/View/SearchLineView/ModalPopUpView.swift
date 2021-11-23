@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ModalPopUpView: View {
     @ObservedObject var fetcher: LineViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     //var lines: [VehicleAnnotation]
     //@Binding var showModalPopUp: Bool
@@ -16,6 +17,7 @@ struct ModalPopUpView: View {
     @Binding var showSearchLinesView: Bool
     
     @Binding var favouriteLines: [String]
+    @State private var isFavouriteSection: Bool = false
     
     var filteredLines: [BusAndTram] {
         if searchText.count == 0 {
@@ -28,8 +30,7 @@ struct ModalPopUpView: View {
     
     var body: some View {
         ZStack {
-            Color.black
-                .edgesIgnoringSafeArea(.all)
+            colorScheme == .dark ? Color.black : Color.white
             
             VStack(spacing: 8) {
                 HStack {
@@ -39,21 +40,57 @@ struct ModalPopUpView: View {
                     }, label: {
                         Image(systemName: "xmark.circle")
                             .font(.system(size: 34))
-                            .foregroundColor(.white)
+                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                     })
                     .padding(.horizontal)
                 }
                 
-                Spacer()
+                ScrollView {
+                    Spacer()
+                    
+                    SearchBar(searchText: $searchText)
+                        .padding(.bottom)
+                    
+                    Spacer()
+                    VStack {
+                        if !favouriteLines.isEmpty {
+                            VStack {
+                                HStack(spacing: 2) {
+                                    Text("Ulubione linie")
+                                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                                        .font(.headline)
+                                        .frame(alignment: .leading)
+                                    Spacer()
+                                }
+                                .padding(.leading)
+                                
+                                ZStack {
+                                    ScrollView(showsIndicators: false, content: {
+                                        SearchFavLinesView(favouriteLines: $favouriteLines)
+                                    })
+                                        .frame(height: 130)
+                                    //.frame(maxHeight: CGFloat((favouriteLines.count % 5) * 65))
+                                    .padding()
+                                }
+                            }
+                        }
+                        
+                        HStack(spacing: 2) {
+                            Text("Dostępne linie")
+                                .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                                .font(.headline)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .padding(.leading)
+                        
+                        ScrollView(showsIndicators: true, content: {
+                            SearchLinesView(lines: filteredLines, favouriteLines: $favouriteLines)
+                        })
+                            .padding()
+                    }
+                }
                 
-                SearchBar(searchText: $searchText)
-                
-                Spacer()
-                
-                ScrollView(showsIndicators: false, content: {
-                    SearchLinesView(lines: filteredLines, favouriteLines: $favouriteLines)
-                })
-                .padding()
             }
             
         }
@@ -67,6 +104,7 @@ struct ModalPopUpView_Previews: PreviewProvider {
                 .edgesIgnoringSafeArea(.all)
             
             ModalPopUpView(fetcher: LineViewModel(service: LineService()), showSearchLinesView: .constant(true), favouriteLines: .constant(exampleLinesString))
-        }//showModalPopUp: .constant(true))
+        }
+        //showModalPopUp: .constant(true))
     }
 }

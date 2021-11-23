@@ -12,20 +12,16 @@ struct SideMenuCell: View {
     let option: SideMenuViewOption
     
     var body: some View {
-        HStack(spacing: 16) {
-            Button {
-                // action dont needed if navigation link available
-            } label: {
-                Image(systemName: option.imageName)
-                    .frame(width: 24, height: 24)
-                Text(option.title)
-                    .font(.system(size: 15, weight: .bold))
-            }
+        HStack(spacing: 12) {
+            Image(systemName: option.imageName)
+                .frame(width: 24, height: 24)
+            Text(option.title)
+                .font(.system(size: 15, weight: .bold))
             
             Spacer()
         }
-        .foregroundColor(colorScheme == .dark ? .white : .black)
         .padding()
+        .foregroundColor(colorScheme == .dark ? .white : .black)
     }
 }
 

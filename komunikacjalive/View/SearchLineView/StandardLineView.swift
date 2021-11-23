@@ -11,15 +11,16 @@ struct StandardLineView: View {
     var line: BusAndTram?
     @Binding var favouriteLines: [String]
     
+    var action: () -> Void
+    
     var body: some View {
         ZStack {
             if let line = line {
                 Button(action: {
-                    favouriteLines.append(line.lineName)
-                    favouriteLines = Array(Set(favouriteLines))
+                    action()
                 }, label: {
                     Circle()
-                        .strokeBorder(line.lineName.count > 2 ? Color(UIColor(named: "busCol")!) : Color(UIColor(named: "tramCol")!), lineWidth: 3)
+                        .strokeBorder(line.lineName.count > 2 ? Color(UIColor(named: "busCol")!) :Color(UIColor(named: "tramCol")!), lineWidth: 4)
                         //.strokeBorder(Color.red, lineWidth: 4)
                         .background(Circle().foregroundColor(.white))
                         .frame(width: 65, height: 65)
@@ -32,12 +33,16 @@ struct StandardLineView: View {
                     .foregroundColor(.black)
                     //.animation(.default)
             }
+            
+            
         }
     }
 }
 
 struct StandardLineView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardLineView(line: busexample1, favouriteLines: .constant(exampleLinesString))
+        StandardLineView(line: busexample1, favouriteLines: .constant(exampleLinesString)) {
+            //
+        }
     }
 }

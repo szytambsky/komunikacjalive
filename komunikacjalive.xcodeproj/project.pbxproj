@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C21029EB27466C5F0086B9B4 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21029EA27466C5F0086B9B4 /* Appearance.swift */; };
 		C2165D7E26E6CD2200808E86 /* LineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2165D7D26E6CD2200808E86 /* LineViewModel.swift */; };
+		C226AED2273B4B67009E488D /* SearchFavLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C226AED1273B4B67009E488D /* SearchFavLinesView.swift */; };
+		C226AED5273B5447009E488D /* StandardFavouriteLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C226AED4273B5447009E488D /* StandardFavouriteLineView.swift */; };
 		C22A919526DFAA24007C5AAE /* komunikacjaliveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22A919426DFAA24007C5AAE /* komunikacjaliveApp.swift */; };
 		C22A919726DFAA24007C5AAE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22A919626DFAA24007C5AAE /* ContentView.swift */; };
 		C22A919926DFAA25007C5AAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C22A919826DFAA25007C5AAE /* Assets.xcassets */; };
@@ -27,10 +30,11 @@
 		C24FEA84270FA52300B61F79 /* OnboardingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24FEA83270FA52300B61F79 /* OnboardingFeature.swift */; };
 		C2588F8426DFBD2B00574135 /* VehicleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */; };
 		C260568826FB74A400A7CF63 /* BusAndTram.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260568726FB74A400A7CF63 /* BusAndTram.swift */; };
+		C261BE5C27459DAC00553072 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C261BE5B27459DAC00553072 /* Lottie */; };
+		C261BE5E27459DCD00553072 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C261BE5D27459DCD00553072 /* LottieView.swift */; };
 		C26A559826ED55EF00199CC6 /* LineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A559726ED55EF00199CC6 /* LineService.swift */; };
 		C26A559A26ED678E00199CC6 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A559926ED678E00199CC6 /* APIError.swift */; };
 		C2860D6926E243D0006BF804 /* ModalPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2860D6826E243D0006BF804 /* ModalPopUpView.swift */; };
-		C2860D7126E2487C006BF804 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2860D7026E2487C006BF804 /* Colors.swift */; };
 		C2860D7626E25085006BF804 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2860D7526E25085006BF804 /* SearchBar.swift */; };
 		C2860D8426E26A79006BF804 /* GlobalHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2860D8326E26A78006BF804 /* GlobalHelpers.swift */; };
 		C29F5DFC26E1924C00E3B35B /* StandardLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29F5DFB26E1924C00E3B35B /* StandardLineView.swift */; };
@@ -63,7 +67,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C21029EA27466C5F0086B9B4 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		C2165D7D26E6CD2200808E86 /* LineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewModel.swift; sourceTree = "<group>"; };
+		C226AED1273B4B67009E488D /* SearchFavLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFavLinesView.swift; sourceTree = "<group>"; };
+		C226AED4273B5447009E488D /* StandardFavouriteLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardFavouriteLineView.swift; sourceTree = "<group>"; };
 		C22A919126DFAA24007C5AAE /* komunikacjalive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = komunikacjalive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22A919426DFAA24007C5AAE /* komunikacjaliveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = komunikacjaliveApp.swift; sourceTree = "<group>"; };
 		C22A919626DFAA24007C5AAE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,10 +96,10 @@
 		C24FEA83270FA52300B61F79 /* OnboardingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFeature.swift; sourceTree = "<group>"; };
 		C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleAnnotation.swift; sourceTree = "<group>"; };
 		C260568726FB74A400A7CF63 /* BusAndTram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusAndTram.swift; sourceTree = "<group>"; };
+		C261BE5D27459DCD00553072 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		C26A559726ED55EF00199CC6 /* LineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineService.swift; sourceTree = "<group>"; };
 		C26A559926ED678E00199CC6 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		C2860D6826E243D0006BF804 /* ModalPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPopUpView.swift; sourceTree = "<group>"; };
-		C2860D7026E2487C006BF804 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C2860D7526E25085006BF804 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		C2860D8326E26A78006BF804 /* GlobalHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHelpers.swift; sourceTree = "<group>"; };
 		C29F5DFB26E1924C00E3B35B /* StandardLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardLineView.swift; sourceTree = "<group>"; };
@@ -112,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C261BE5C27459DAC00553072 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +140,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C226AED3273B50AD009E488D /* FavouriteSection */ = {
+			isa = PBXGroup;
+			children = (
+				C226AED1273B4B67009E488D /* SearchFavLinesView.swift */,
+				C226AED4273B5447009E488D /* StandardFavouriteLineView.swift */,
+			);
+			path = FavouriteSection;
+			sourceTree = "<group>";
+		};
 		C22A918826DFAA24007C5AAE = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +233,7 @@
 				C2CEF99F26F39795001BC244 /* MapViewRep */,
 				C22A91C826DFAA80007C5AAE /* MapView */,
 				C2C7C80726ED7D9200844546 /* RelatedAPIView */,
+				C261BE592745729500553072 /* Animation */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,8 +271,8 @@
 			isa = PBXGroup;
 			children = (
 				C246C7F926E0F2CF00D9F693 /* MockData.swift */,
-				C2860D7026E2487C006BF804 /* Colors.swift */,
 				C2860D8326E26A78006BF804 /* GlobalHelpers.swift */,
+				C21029EA27466C5F0086B9B4 /* Appearance.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -277,6 +295,14 @@
 			path = OnboardingModel;
 			sourceTree = "<group>";
 		};
+		C261BE592745729500553072 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				C261BE5D27459DCD00553072 /* LottieView.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
 		C26A559626ED55DB00199CC6 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +315,7 @@
 		C29F5DFA26E1923500E3B35B /* SearchLineView */ = {
 			isa = PBXGroup;
 			children = (
+				C226AED3273B50AD009E488D /* FavouriteSection */,
 				C2860D6826E243D0006BF804 /* ModalPopUpView.swift */,
 				C2860D7526E25085006BF804 /* SearchBar.swift */,
 				C29F5E0E26E19A0F00E3B35B /* SearchLinesView.swift */,
@@ -340,6 +367,9 @@
 			dependencies = (
 			);
 			name = komunikacjalive;
+			packageProductDependencies = (
+				C261BE5B27459DAC00553072 /* Lottie */,
+			);
 			productName = komunikacjalive;
 			productReference = C22A919126DFAA24007C5AAE /* komunikacjalive.app */;
 			productType = "com.apple.product-type.application";
@@ -411,6 +441,9 @@
 				Base,
 			);
 			mainGroup = C22A918826DFAA24007C5AAE;
+			packageReferences = (
+				C261BE5A27459DAC00553072 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = C22A919226DFAA24007C5AAE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -459,7 +492,7 @@
 				C241E692271623F000F6F5F7 /* SideMenuHeaderView.swift in Sources */,
 				C26A559826ED55EF00199CC6 /* LineService.swift in Sources */,
 				C2FB99BB271ED6A900523488 /* AnnotationView.swift in Sources */,
-				C2860D7126E2487C006BF804 /* Colors.swift in Sources */,
+				C226AED5273B5447009E488D /* StandardFavouriteLineView.swift in Sources */,
 				C2588F8426DFBD2B00574135 /* VehicleAnnotation.swift in Sources */,
 				C2C7C80F26ED7E2500844546 /* LoadingView.swift in Sources */,
 				C22A91CA26DFAA89007C5AAE /* MapView.swift in Sources */,
@@ -469,7 +502,9 @@
 				C2CEF9A126F397A3001BC244 /* MapViewRep.swift in Sources */,
 				C29F5E0F26E19A0F00E3B35B /* SearchLinesView.swift in Sources */,
 				C24AEA3C272443E500E34979 /* ClusterView.swift in Sources */,
+				C226AED2273B4B67009E488D /* SearchFavLinesView.swift in Sources */,
 				C24FEA84270FA52300B61F79 /* OnboardingFeature.swift in Sources */,
+				C21029EB27466C5F0086B9B4 /* Appearance.swift in Sources */,
 				C24FEA80270FA30000B61F79 /* OnboardingContainerView.swift in Sources */,
 				C2CEF9A326F39AFA001BC244 /* Home.swift in Sources */,
 				C241E6962716297F00F6F5F7 /* SideMenuCell.swift in Sources */,
@@ -483,6 +518,7 @@
 				C29F5DFC26E1924C00E3B35B /* StandardLineView.swift in Sources */,
 				C2860D7626E25085006BF804 /* SearchBar.swift in Sources */,
 				C246C80226E1057400D9F693 /* MapViewModel.swift in Sources */,
+				C261BE5E27459DCD00553072 /* LottieView.swift in Sources */,
 				C2C7C80D26ED7E1F00844546 /* ErrorView.swift in Sources */,
 				C24FEA82270FA30E00B61F79 /* OnboardingContentView.swift in Sources */,
 			);
@@ -804,6 +840,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C261BE5A27459DAC00553072 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C261BE5B27459DAC00553072 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C261BE5A27459DAC00553072 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C22A918926DFAA24007C5AAE /* Project object */;
 }

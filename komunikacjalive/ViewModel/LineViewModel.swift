@@ -23,8 +23,6 @@ class LineViewModel: ObservableObject {
     @Published var favouriteBusesAndTram = [BusAndTram]()
     @Published var vehicleDictionary = [String: VehicleAnnotation]()
     
-    var dict = [String: VehicleAnnotation]()
-    
     //static let shared = LineViewModel(service: LineService())
     
     // MARK: - TO DO: hide api key
@@ -109,13 +107,14 @@ class LineViewModel: ObservableObject {
         
         $favouriteBusesAndTram
             .removeDuplicates()
-            .map({ [unowned self] favLines in
+            .map({ favLines in
                 //print("DEBUG 2 - return favlines: \(favLines)")
+                var dict = [String: VehicleAnnotation]()
                 for line in favLines {
-                    self.dict[line.vehicleNumber] = VehicleAnnotation(lineName: line.lineName, vehicleNumber: line.vehicleNumber, brigade: "", latitude: line.latitude, longitude: line.longitude, coordinate: CLLocationCoordinate2D(latitude: line.latitude, longitude: line.longitude), title: line.lineName, subtitle: line.vehicleNumber)
+                    dict[line.vehicleNumber] = VehicleAnnotation(lineName: line.lineName, vehicleNumber: line.vehicleNumber, brigade: "", latitude: line.latitude, longitude: line.longitude, coordinate: CLLocationCoordinate2D(latitude: line.latitude, longitude: line.longitude), title: line.lineName, subtitle: line.vehicleNumber)
                     //print("vehicleNumber: \(line.vehicleNumber), lineName: \(line.lineName)")
                 }
-                return self.dict
+                return dict
             })
             .assign(to: &$vehicleDictionary)
     }
@@ -152,3 +151,16 @@ class LineViewModel: ObservableObject {
 //                }
 //            }
 //        }
+
+
+//$favouriteBusesAndTram
+//    .removeDuplicates()
+//    .map({ [unowned self] favLines in
+//        //print("DEBUG 2 - return favlines: \(favLines)")
+//        for line in favLines {
+//            self.dict[line.vehicleNumber] = VehicleAnnotation(lineName: line.lineName, vehicleNumber: line.vehicleNumber, brigade: "", latitude: line.latitude, longitude: line.longitude, coordinate: CLLocationCoordinate2D(latitude: line.latitude, longitude: line.longitude), title: line.lineName, subtitle: line.vehicleNumber)
+//            //print("vehicleNumber: \(line.vehicleNumber), lineName: \(line.lineName)")
+//        }
+//        return self.dict
+//    })
+//    .assign(to: &$vehicleDictionary)

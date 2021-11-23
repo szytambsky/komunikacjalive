@@ -70,12 +70,18 @@ struct MapViewRep: UIViewRepresentable {
             let imageBeforeRotation = annotationView?.image
             let imageAfterRotation = imageBeforeRotation?.rotate(radians: Float(CGFloat(getAngle)))
             annotationView?.image = imageAfterRotation
-            annotationView?.frame = CGRect(x: 0, y: 0, width: 64, height: 64)
+            
+            /* 0.25 is a proportion of declared in Coordinator class the
+             width and height of vehicle image to original image size */
+            
+            annotationView?.frame = CGRect(x: 0, y: 0, width: (annotationView?.bounds.size.width)! * 0.25, height: (annotationView?.bounds.size.height)! * 0.25)
+            
+            /* second out of three way to transform image describe at https://coderedirect.com/questions/386913/how-to-rotate-custom-userlocationannotationview-image-using-mapkit-in-swift
+             */
+            
             //annotationView?.transform = CGAffineTransform(rotationAngle: CGFloat(getAngle))
             //annotationView?.btnInfo?.transform = CGAffineTransform(rotationAngle: CGFloat(getAngle))
             //annotationView?.image?.ciImage?.transformed(by: CGAffineTransform(rotationAngle: CGFloat(getAngle)))
-            //busesAndTrams = []
-            //vehiclesDictionary = [:]
         }
     }
     
@@ -101,6 +107,9 @@ struct MapViewRep: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
+        
+        let vehicleWidthSize = 64
+        let vehicleHeightSize = 64
         
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             if annotation is MKUserLocation {
@@ -129,25 +138,28 @@ struct MapViewRep: UIViewRepresentable {
             annotView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
             
             let pinIcon = UIImage(named: "autobus")
-            //let pinIcon = UIImage(systemName: "arrowtriangle.down.fill")
             annotView?.image = pinIcon
-            annotView?.backgroundColor = .yellow
-            //annotView?.frame = CGRect(x: 0, y: 0, width: pinIcon!.size.width/4, height: pinIcon!.size.height/4)
-            annotView?.frame = CGRect(x: 0, y: 0, width: 64, height: 64)
-            
-            let annotationLabel = UILabel(frame: CGRect(x: pinIcon!.size.width/13, y: pinIcon!.size.width/12, width: 26, height: 26)) // change to height
+            annotView?.frame = CGRect(x: 0, y: 0, width: vehicleWidthSize, height: vehicleHeightSize)
+//            let annotationLabel = UILabel(frame: CGRect(x: (annotView?.bounds.size.width)!/2 - 13, y: (annotView?.bounds.size.height)!/2 - 13, width: 26, height: 26))
+            let annotationLabel = UILabel()
+            annotView?.addSubview(annotationLabel)
+            annotationLabel.translatesAutoresizingMaskIntoConstraints = false
+            annotationLabel.widthAnchor.constraint(equalToConstant: 26).isActive = true
+            annotationLabel.heightAnchor.constraint(equalToConstant: 26).isActive = true
+            annotationLabel.centerXAnchor.constraint(equalTo: annotView!.centerXAnchor).isActive = true
+            annotationLabel.centerYAnchor.constraint(equalTo: annotView!.centerYAnchor).isActive = true
             annotationLabel.backgroundColor = .blue
             annotationLabel.numberOfLines = 0
             annotationLabel.textAlignment = .center
             annotationLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
             annotationLabel.text = annotation.title!
-            annotationLabel.textColor = .red
+            annotationLabel.textColor = .white
             annotationLabel.backgroundColor = UIColor(named: colorName)
-            annotationLabel.layer.cornerRadius = (annotationLabel.frame.width/2)
+            annotationLabel.layer.cornerRadius = 13//(annotationLabel.frame.width/2)
             annotationLabel.layer.masksToBounds = true
             annotationLabel.layer.borderWidth = 2
             annotationLabel.layer.borderColor = UIColor.white.cgColor
-            annotView?.addSubview(annotationLabel)
+            
             annotView?.clusteringIdentifier = "bus"
             //annotView?.rightCalloutAccessoryView = annotView?.btnInfo
             annotView?.canShowCallout = true

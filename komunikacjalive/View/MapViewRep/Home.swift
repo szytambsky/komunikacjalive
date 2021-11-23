@@ -28,6 +28,7 @@ struct Home: View {
             }
             
             MapViewRep(busesAndTrams: fetcher.busesAndTrams, vehicleDictionary: fetcher.vehicleDictionary)
+                .cornerRadius(showingSideMenu ? 20 : 10)
                 .environmentObject(mapData)
                 .onReceive(timer, perform: { time in
                     fetcher.fetchLines()
@@ -36,6 +37,7 @@ struct Home: View {
                 .opacity(showingSideMenu ? 0.25 : 1)
                 .scaleEffect(showingSideMenu ? 0.9 : 1)
                 .shadow(color: showingSideMenu ? .black : .clear, radius: 20, x: 0, y: 0)
+                //.customCornerRadius(24, corners: [.topLeft, .topRight])
                 .disabled(showingSideMenu)
             
             VStack {
