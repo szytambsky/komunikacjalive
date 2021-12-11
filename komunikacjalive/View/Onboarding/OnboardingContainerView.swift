@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//ignroe safe area https://serialcoder.dev/text-tutorials/swiftui/ignoring-safe-area-in-swiftui/
 struct OnboardingContainerView: View {
     @Binding var isOnboarding: Bool
     @Environment(\.colorScheme) var colorScheme

@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import MapKit
-//latitude: 52.235031, longitude: 21.01876)
 
 let exampleAnnotation1 = VehicleAnnotation(lineName: "7", vehicleNumber: "5555", brigade: "7", latitude: 52.235031, longitude: 21.01876, coordinate: CLLocationCoordinate2D(latitude: 52.235031, longitude: 21.01876), title: "7", subtitle: "5555")
 let exampleAnnotation2 = VehicleAnnotation(lineName: "520", vehicleNumber: "4444", brigade: "4", latitude: 52.234031, longitude: 21.01976, coordinate: CLLocationCoordinate2D(latitude: 52.234031, longitude: 21.01976), title: "520", subtitle: "4444")

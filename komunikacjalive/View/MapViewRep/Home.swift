@@ -24,7 +24,7 @@ struct Home: View {
     var body: some View {
         ZStack {
             if showingSideMenu {
-                SideMenuView(isShowing: $showingSideMenu)
+                SideMenuView(isShowing: $showingSideMenu, currentDate: $fetcher.currentDate)
             }
             
             MapViewRep(busesAndTrams: fetcher.busesAndTrams, vehicleDictionary: fetcher.vehicleDictionary)
@@ -33,11 +33,10 @@ struct Home: View {
                 .onReceive(timer, perform: { time in
                     fetcher.fetchLines()
                 })
-                .offset(x: showingSideMenu ? (screen.width / 1.3) : 0, y: showingSideMenu ? (screen.height / 6) : 0)
+                .offset(x: showingSideMenu ? (screen.width / 1.52) : 0, y: showingSideMenu ? (screen.height / 9) : 0)
                 .opacity(showingSideMenu ? 0.25 : 1)
                 .scaleEffect(showingSideMenu ? 0.9 : 1)
                 .shadow(color: showingSideMenu ? .black : .clear, radius: 20, x: 0, y: 0)
-                //.customCornerRadius(24, corners: [.topLeft, .topRight])
                 .disabled(showingSideMenu)
             
             VStack {
@@ -77,19 +76,11 @@ struct Home: View {
                 LoadingView()
             }
         }
-        //// https://developer.apple.com/documentation/swiftui/view/edgesignoringsafearea(_:)
         .edgesIgnoringSafeArea(.all)
         .onAppear(perform: {
             mapData.checkIfLocationServicesIsEnabled()
             self.showingSideMenu = false
         })
-        .alert(isPresented: $mapData.permissionDenied, content: {
-            Alert(title: Text("Permission Denied"), message: Text("You have denied this app location permission. Change it in settings"), dismissButton: .default(Text("Go to Settings"), action: {
-                // Redirect user to settings
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-            }))
-        })
-        
     }
 }
 
@@ -110,15 +101,13 @@ struct RightPanelButtons: View {
     @ObservedObject var fetcher: LineViewModel
     @Binding var showSearchLinesView: Bool
     @Binding var favouriteLines: [String]
+    @State var goToSettings = false
     
     var body: some View {
         HStack {
             Spacer()
             
             ZStack {
-//                Capsule()
-//                    .foregroundColor(.green.opacity(0.15))
-//                    .frame(width: 70, height: 220)
                 VStack(spacing: 20) {
                     Button(action: {
                         showSearchLinesView = true
@@ -132,12 +121,15 @@ struct RightPanelButtons: View {
                             .shadow(color: .gray, radius: 1, x: 0, y: 1)
                     })
                     .fullScreenCover(isPresented: $showSearchLinesView, content: {
-                        ModalPopUpView(fetcher: fetcher, showSearchLinesView: $showSearchLinesView, favouriteLines: $fetcher.favouriteLinesName)// $favouriteLines)
+                        ModalPopUpView(fetcher: fetcher, showSearchLinesView: $showSearchLinesView, favouriteLines: $fetcher.favouriteLinesName)
                     })
                     
                     Button(action: {
-                        //mapData.centerUserLocation()
-                        mapData.centerViewOnUserLocation()
+                        if mapData.isAuthorized {
+                            mapData.centerViewOnUserLocation()
+                        } else {
+                            goToSettings = true
+                        }
                     }, label: {
                         Image(systemName: "location.fill")
                             .font(.title2)
@@ -147,6 +139,11 @@ struct RightPanelButtons: View {
                             .foregroundColor(colorScheme == .dark ? .white : Color.graySearchBackground.opacity(0.55))
                             .shadow(color: .gray, radius: 1, x: 0, y: 1)
                     })
+                    .alert(isPresented: $goToSettings) {
+                        Alert(title: Text("Lokalizacja niedostępna"), message: Text("Odrzuciłeś możliwość ustaleniapołożenia urządzenia. Aby skorzystać zmień to w ustawieniach"), primaryButton:.default(Text("Idź do ustawień")) {
+
+                        UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!, options:[:], completionHandler: nil)
+                        }, secondaryButton: .destructive(Text("Anuluj")))}
                     
                     Button(action: {
                         mapData.updateMapType()

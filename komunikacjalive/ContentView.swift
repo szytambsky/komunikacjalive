@@ -11,8 +11,8 @@ struct ContentView: View {
     @State private var isNavigationBarHidden = true
     
     var body: some View {
-        ZStack {
-            NavigationView {
+        NavigationView {
+            ZStack {
                 Home()
                     .navigationBarTitle("", displayMode: .inline)
                     .navigationBarHidden(self.isNavigationBarHidden)
@@ -21,6 +21,7 @@ struct ContentView: View {
                     })
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

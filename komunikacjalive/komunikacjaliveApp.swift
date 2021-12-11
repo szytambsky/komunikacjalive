@@ -10,16 +10,18 @@ import SwiftUI
 @main
 struct komunikacjaliveApp: App {
     @AppStorage("isOnboarding") var isOnboarding = true
-    //@StateObject var viewModel = MapViewModel()
-
+    @State private var isSplashScreenOnScreen = true
+    
     var body: some Scene {
         WindowGroup {
-            if isOnboarding {
-                OnboardingContainerView(isOnboarding: $isOnboarding)
-            } else {
-                ContentView()
-                    //.environmentObject(MapViewModel.shared)
-                    //.environmentObject(viewModel)
+            ZStack {
+                if isOnboarding {
+                    OnboardingContainerView(isOnboarding: $isOnboarding)
+                } else if isOnboarding == false && isSplashScreenOnScreen == false {
+                    ContentView()
+                }
+                
+                SplashScreen(isSplashScreenOn: $isSplashScreenOnScreen)
             }
         }
     }

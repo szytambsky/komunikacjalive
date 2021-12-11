@@ -20,7 +20,6 @@ struct StandardFavouriteLineView: View {
             }, label: {
                 Circle()
                     .strokeBorder(favouriteLine.count > 2 ? Color(UIColor(named: "busCol")!):Color(UIColor(named: "tramCol")!), lineWidth: 3)
-                    //.strokeBorder(Color.red, lineWidth: 4)
                     .background(Circle().foregroundColor(.white))
                     .frame(width: 65, height: 65)
                     .padding(4)
@@ -30,7 +29,6 @@ struct StandardFavouriteLineView: View {
                 .bold()
                 .font(.system(size: 24))
                 .foregroundColor(.black)
-                //.animation(.default)
         }
     }
 }

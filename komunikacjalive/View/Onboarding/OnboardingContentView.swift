@@ -16,7 +16,6 @@ struct OnboardingContentView: View {
     
     var body: some View {
         ZStack {
-            //LinearGradient(gradient: Gradient(colors: [Color.white, Color.yellow]), startPoint: .topLeading, endPoint: .bottomTrailing)
             colorScheme == .dark ? Color.black : Color.white
             
             VStack {
@@ -25,7 +24,6 @@ struct OnboardingContentView: View {
                 Image(feature.image)
                     .resizable()
                     .scaledToFill()
-                    //.clipShape(Circle())
                     .frame(width: screen.width / 1.5, height: screen.width / 1.5)
                     .shadow(color: .gray, radius: 3, x: 0, y: 3)
                 
@@ -37,7 +35,6 @@ struct OnboardingContentView: View {
                     Text(feature.subtitle)
                         .font(.callout)
                 }
-                //.multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                 .padding()

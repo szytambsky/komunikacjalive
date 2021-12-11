@@ -16,17 +16,13 @@ enum MapDetails {
 
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var mapView = MKMapView()
-    @Published var permissionDenied = false
+    @Published var isAuthorized = false
     @Published var mapType: MKMapType = .standard
     
-    @Published var region: MKCoordinateRegion!//(center: MapDetails.startingLocation, span: MapDetails.defaultSpan)
+    @Published var region: MKCoordinateRegion!
     
     // nil => user can turn off location services for whole phone
     var locationManager: CLLocationManager?
-    
-    //static let shared = MapViewModel()
-    var oldLocations = [CLLocationCoordinate2D]()
-    var newLocations = [CLLocationCoordinate2D]()
     
     func updateMapType() {
         if mapType == .standard {
@@ -42,36 +38,32 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             locationManager?.delegate = self
-            //centerViewOnUserLocation()
-        } else {
-            print("Show an alert letting user now location services for whole phone are off")
         }
     }
     
-    // The system calls this method when the app creates the related object’s CLLocationManager instance, and when the app’s authorization status changes.
+    //// The system calls this method when the app creates the related object’s CLLocationManager instance, and when the app’s authorization status changes.
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        //checkLocationAuthorization()
         switch manager.authorizationStatus {
-            case .notDetermined:
-                manager.requestWhenInUseAuthorization()
-            case .restricted:
-                print("Location is restricted")
-            case .denied:
-                print("You have denied this app location permission. Change it in settings")
-                permissionDenied.toggle()
-            case .authorizedAlways, .authorizedWhenInUse:
-                //manager.requestLocation()
-                centerViewOnUserLocation()
-            @unknown default:
-                break
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .denied:
+            isAuthorized = false
+        case .authorizedAlways, .authorizedWhenInUse:
+            isAuthorized = true
+            centerViewOnUserLocation()
+        default:
+            break
         }
     }
     
+    ////  Set visable rect around user current location
     func centerViewOnUserLocation() {
         if let location = locationManager?.location?.coordinate {
             region = MKCoordinateRegion.init(center: location, latitudinalMeters: MapDetails.regionInMeters, longitudinalMeters: MapDetails.regionInMeters)
-            self.mapView.setRegion(region, animated: true)
-            self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+            DispatchQueue.main.async {
+                self.mapView.setRegion(self.region, animated: true)
+                self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+            }
         }
     }
     
@@ -79,15 +71,17 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         print(error.localizedDescription)
     }
     
-    // Getting user Region
+    ////  Getting user last location region
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
 
         self.region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: MapDetails.regionInMeters, longitudinalMeters: MapDetails.regionInMeters)
 
         // Updating map & Smooth animations
-        self.mapView.setRegion(self.region, animated: true)
-        self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+        DispatchQueue.main.async {
+            self.mapView.setRegion(self.region, animated: true)
+            self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+        }
     }
     
 }

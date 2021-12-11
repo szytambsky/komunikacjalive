@@ -18,11 +18,13 @@ struct BusAndTram: Codable, Hashable, Equatable {
     var longitude: Double = 0.0
     var oldLatitude: Double = 0.0
     var oldLongitude: Double = 0.0
+    var time: String = "Nie otrzymano danych w dniu dzisiejszym"
     
     enum CodingKeys: String, CodingKey {
         case lineName = "Lines"
         case latitude = "Lat"
         case longitude = "Lon"
         case vehicleNumber = "VehicleNumber"
+        case time = "Time"
     }
 }

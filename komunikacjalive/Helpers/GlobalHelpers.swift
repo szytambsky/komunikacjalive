@@ -95,7 +95,7 @@ extension Array {
     }
 }
 
-// Custom corner rounding by custom rendered path by UIBezierPath: .topLeft, .bottomRight etc
+//// Custom corner rounding by UIBezierPath: .topLeft, .bottomRight etc
 extension View {
     func customCornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners))

@@ -17,8 +17,6 @@ struct SideMenuCell: View {
                 .frame(width: 24, height: 24)
             Text(option.title)
                 .font(.system(size: 15, weight: .bold))
-            
-            Spacer()
         }
         .padding()
         .foregroundColor(colorScheme == .dark ? .white : .black)
@@ -27,6 +25,6 @@ struct SideMenuCell: View {
 
 struct SideMenuCell_Previews: PreviewProvider {
     static var previews: some View {
-        SideMenuCell(option: SideMenuViewOption.author)
+        SideMenuCell(option: SideMenuViewOption.appinfo)
     }
 }

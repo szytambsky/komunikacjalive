@@ -8,20 +8,20 @@
 import Foundation
 
 enum SideMenuViewOption: Int, CaseIterable {
-    case moreinfo
-    case author
+    case appinfo
+    case privacypolicy
     
     var title: String {
         switch self {
-        case .moreinfo: return "Polityka Prywatności"
-        case .author: return "O Autorze"
+        case .appinfo: return "O Aplikacji"
+        case .privacypolicy: return "Polityka Prywatności"
         }
     }
     
     var imageName: String {
         switch self {
-        case .moreinfo: return "info.circle"
-        case .author: return "person.circle"
+        case .appinfo: return "info.circle"
+        case .privacypolicy: return "checkmark.shield"
         }
     }
 }

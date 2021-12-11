@@ -10,9 +10,6 @@ import SwiftUI
 struct ModalPopUpView: View {
     @ObservedObject var fetcher: LineViewModel
     @Environment(\.colorScheme) var colorScheme
-    
-    //var lines: [VehicleAnnotation]
-    //@Binding var showModalPopUp: Bool
     @State private var searchText = ""
     @Binding var showSearchLinesView: Bool
     
@@ -105,6 +102,5 @@ struct ModalPopUpView_Previews: PreviewProvider {
             
             ModalPopUpView(fetcher: LineViewModel(service: LineService()), showSearchLinesView: .constant(true), favouriteLines: .constant(exampleLinesString))
         }
-        //showModalPopUp: .constant(true))
     }
 }
