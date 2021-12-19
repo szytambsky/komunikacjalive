@@ -9,7 +9,6 @@ import SwiftUI
 
 struct OnboardingContainerView: View {
     @Binding var isOnboarding: Bool
-    @Environment(\.colorScheme) var colorScheme
     
     let onboardingFeatures = [
         Feature(title: "Zacznij już dziś", subtitle: "Miej swoje ulubione autobusy zawsze na wyciągniecie ręki", image: "ob-subway"),
@@ -26,7 +25,7 @@ struct OnboardingContainerView: View {
         .tabViewStyle(PageTabViewStyle())
         .onAppear {
             UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(named: "lightBlue")
-            UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color.graySearchText)
+            UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color(uiColor: .systemGray))
         }
         .onDisappear {
             UIPageControl.appearance().currentPageIndicatorTintColor = nil

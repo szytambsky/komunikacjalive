@@ -14,7 +14,7 @@ struct SideMenuHeaderView: View {
     var body: some View {
         ZStack(alignment: .trailing) {
             HStack {
-                Text("Komunikacja wersja 1.0")
+                Text("Posbus")
                     .font(.system(size: 18, weight: .bold))
                     .padding(.leading, 12)
                 
@@ -27,12 +27,11 @@ struct SideMenuHeaderView: View {
                 }, label: {
                     Image(systemName: "xmark")
                         .frame(width: 32, height: 32)
-                        .foregroundColor(colorScheme == .dark ? .white : .black)
                         .padding()
                 })
             }
         }
-        .foregroundColor(colorScheme == .dark ? .white : .black)
+        .foregroundColor(Color(uiColor: .label))
     }
 }
 

@@ -12,10 +12,11 @@ import MapKit
 let exampleAnnotation1 = VehicleAnnotation(lineName: "7", vehicleNumber: "5555", brigade: "7", latitude: 52.235031, longitude: 21.01876, coordinate: CLLocationCoordinate2D(latitude: 52.235031, longitude: 21.01876), title: "7", subtitle: "5555")
 let exampleAnnotation2 = VehicleAnnotation(lineName: "520", vehicleNumber: "4444", brigade: "4", latitude: 52.234031, longitude: 21.01976, coordinate: CLLocationCoordinate2D(latitude: 52.234031, longitude: 21.01976), title: "520", subtitle: "4444")
 
-let busexample1 = BusAndTram(lineName: "1", vehicleNumber: "5666", latitude: 52.234031, longitude: 21.0187, oldLatitude: 52.23403, oldLongitude: 21.01876)
-let busexample2 = BusAndTram(lineName: "2", vehicleNumber: "4545", latitude: 52.23031, longitude: 21.187, oldLatitude: 52.2403, oldLongitude: 21.0876)
+let busexample1 = BusAndTram(lineName: "151", vehicleNumber: "5666", latitude: 52.234031, longitude: 21.0187, oldLatitude: 52.23403, oldLongitude: 21.01876)
+let busexample2 = BusAndTram(lineName: "24", vehicleNumber: "4545", latitude: 52.23031, longitude: 21.187, oldLatitude: 52.2403, oldLongitude: 21.0876)
+let busexample3 = BusAndTram(lineName: "9", vehicleNumber: "4549", latitude: 52.23032, longitude: 21.182, oldLatitude: 52.2402, oldLongitude: 21.0872)
 
-let allExampleAnnotations = [busexample1, busexample2]
+let allExampleAnnotations = [busexample1, busexample2, busexample3]
 
 let allExampleAnnotationsOther = [exampleAnnotation1, exampleAnnotation2]
 let exampleLinesString = ["151", "520", "525", "168", "111", "131", "117"]

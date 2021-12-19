@@ -61,15 +61,17 @@ struct MapViewRep: UIViewRepresentable {
             let getAngle = self.angleFromCoordinate(firstCoordinate: oldLocation, secondCoordinate: newLocation)
 
             myAnnotation.coordinate = newLocation
+            //let tintColor = myAnnotation.vehicleType == .bus ? "busCol" : "tramCol"
             let annotationView = mapView.view(for: myAnnotation) as? AnnotationView
             if getAngle == 0.0 {
-                annotationView?.image = UIImage(named: "autobus")
+                annotationView?.image = nil
             } else {
-                let imageBeforeRotation = UIImage(named: "autobus-arrow") //annotationView?.image
+                let imageBeforeRotation = UIImage(named: "bus-arrow")?.withTintColor(UIColor.label).withRenderingMode(.alwaysTemplate)
+                //annotationView?.image
                 let imageAfterRotation = imageBeforeRotation?.rotate(radians: Float(CGFloat(getAngle)))
                 annotationView?.image = imageAfterRotation
             }
-            
+
             /* 0.25 is a proportion of declared in Coordinator class the
              width and height of vehicle image to original image size */
             
@@ -129,14 +131,14 @@ struct MapViewRep: UIViewRepresentable {
             var annotView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? AnnotationView
             annotView = AnnotationView(annotation: annotation, reuseIdentifier: identifier)
             
-            let pinIcon = UIImage(named: "autobus")
-            annotView?.image = pinIcon
+//            let pinIcon = UIImage(named: "bus-arrow")?.withTintColor(UIColor.label).withRenderingMode(.alwaysTemplate)
+//            annotView?.image = pinIcon
             annotView?.frame = CGRect(x: 0, y: 0, width: vehicleWidthSize, height: vehicleHeightSize)
             let annotationLabel = UILabel()
             annotView?.addSubview(annotationLabel)
             annotationLabel.translatesAutoresizingMaskIntoConstraints = false
-            annotationLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            annotationLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            annotationLabel.widthAnchor.constraint(equalToConstant: 31).isActive = true
+            annotationLabel.heightAnchor.constraint(equalToConstant: 31).isActive = true
             annotationLabel.centerXAnchor.constraint(equalTo: annotView!.centerXAnchor).isActive = true
             annotationLabel.centerYAnchor.constraint(equalTo: annotView!.centerYAnchor).isActive = true
             annotationLabel.backgroundColor = .blue
@@ -146,10 +148,10 @@ struct MapViewRep: UIViewRepresentable {
             annotationLabel.text = annotation.title!
             annotationLabel.textColor = .white
             annotationLabel.backgroundColor = UIColor(named: colorName)
-            annotationLabel.layer.cornerRadius = 15
+            annotationLabel.layer.cornerRadius = 15.5
             annotationLabel.layer.masksToBounds = true
             annotationLabel.layer.borderWidth = 2
-            annotationLabel.layer.borderColor = UIColor.white.cgColor
+            annotationLabel.layer.borderColor = UIColor.label.cgColor
             
             annotView?.clusteringIdentifier = "bus"
             //annotView?.rightCalloutAccessoryView = annotView?.btnInfo

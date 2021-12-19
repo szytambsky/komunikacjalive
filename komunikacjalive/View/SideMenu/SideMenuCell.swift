@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SideMenuCell: View {
-    @Environment(\.colorScheme) var colorScheme
     let option: SideMenuViewOption
     
     var body: some View {
@@ -19,7 +18,7 @@ struct SideMenuCell: View {
                 .font(.system(size: 15, weight: .bold))
         }
         .padding()
-        .foregroundColor(colorScheme == .dark ? .white : .black)
+        .foregroundColor(Color(uiColor: .label))
     }
 }
 

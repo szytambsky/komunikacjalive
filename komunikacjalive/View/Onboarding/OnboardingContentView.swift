@@ -10,13 +10,13 @@ import SwiftUI
 struct OnboardingContentView: View {
     var feature: Feature
     @Binding var isOnboarding: Bool
-    @Environment(\.colorScheme) var colorScheme
     
     let screen = UIScreen.main.bounds
     
     var body: some View {
         ZStack {
-            colorScheme == .dark ? Color.black : Color.white
+            Color(uiColor: .systemBackground)
+                .ignoresSafeArea()
             
             VStack {
                 Spacer()
@@ -36,7 +36,7 @@ struct OnboardingContentView: View {
                         .font(.callout)
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
-                .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                .foregroundColor(Color(uiColor: .label))
                 .padding()
                 
                 Spacer()
@@ -48,10 +48,10 @@ struct OnboardingContentView: View {
                         .frame(width: screen.width/3)
                         .font(.headline)
                         .padding()
-                        .background(colorScheme == .dark ? Color.white : Color.black)
+                        .background(Color(uiColor: .label))
                         .clipShape(Capsule())
                         .shadow(color: .gray, radius: 2, x: 0, y: 2)
-                        .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
+                        .foregroundColor(Color(uiColor: .systemBackground))
                 })
                 
                 Spacer()

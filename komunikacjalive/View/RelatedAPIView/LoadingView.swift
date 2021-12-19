@@ -13,7 +13,7 @@ struct LoadingView: View {
             ProgressView()
             Text("Loading...")
                 .font(.system(size: 14))
-                .foregroundColor(.gray)
+                .foregroundColor(Color(uiColor: .systemGray))
         }
     }
 }

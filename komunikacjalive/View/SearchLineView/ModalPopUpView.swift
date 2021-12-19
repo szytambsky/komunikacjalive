@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ModalPopUpView: View {
     @ObservedObject var fetcher: LineViewModel
-    @Environment(\.colorScheme) var colorScheme
     @State private var searchText = ""
     @Binding var showSearchLinesView: Bool
     
@@ -27,7 +26,7 @@ struct ModalPopUpView: View {
     
     var body: some View {
         ZStack {
-            colorScheme == .dark ? Color.black : Color.white
+            Color(uiColor: .systemBackground)
             
             VStack(spacing: 8) {
                 HStack {
@@ -37,7 +36,7 @@ struct ModalPopUpView: View {
                     }, label: {
                         Image(systemName: "xmark.circle")
                             .font(.system(size: 34))
-                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                            .foregroundColor(Color(uiColor: .label))
                     })
                     .padding(.horizontal)
                 }
@@ -54,7 +53,7 @@ struct ModalPopUpView: View {
                             VStack {
                                 HStack(spacing: 2) {
                                     Text("Ulubione linie")
-                                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                                        .foregroundColor(Color(uiColor: .label))
                                         .font(.headline)
                                         .frame(alignment: .leading)
                                     Spacer()
@@ -74,7 +73,7 @@ struct ModalPopUpView: View {
                         
                         HStack(spacing: 2) {
                             Text("Dostępne linie")
-                                .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                                .foregroundColor(Color(uiColor: .label))
                                 .font(.headline)
                                 .frame(alignment: .leading)
                             Spacer()

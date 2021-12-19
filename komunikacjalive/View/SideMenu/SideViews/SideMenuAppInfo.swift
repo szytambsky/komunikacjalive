@@ -18,20 +18,23 @@ struct SideMenuAppInfo: View {
     
     var body: some View {
         ZStack {
+            Color(uiColor: .systemBackground)
+                .ignoresSafeArea()
+            
             List {
                 ForEach(AppInfoContent.allCases, id: \.self) { item in
                     VStack(alignment: .leading, spacing: 12) {
                         Text(item.title)
-                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                             .font(.title2)
                         if item == .data {
-                            Text("\(item.caption) \(currentDateWithoutTime).")
-                                .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
-                                .font(.body)
-                                .padding()
+                            Group {
+                                Text("\(item.caption) \(currentDateWithoutTime).")
+                                Text("\(item.timeDilatation)")
+                            }
+                            .font(.body)
+                            .padding()
                         } else {
                             Text(item.caption)
-                                .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                                 .font(.body)
                         }
                     }
@@ -39,9 +42,10 @@ struct SideMenuAppInfo: View {
                 }
                 .padding()
             }
-            .listRowBackground(colorScheme == .dark ? Color.black : Color.white)
+            .foregroundColor(Color(uiColor: .label))
+            .listRowBackground(Color(uiColor: .secondarySystemGroupedBackground))
         }
-        .ignoresSafeArea()
+        //.ignoresSafeArea() 
     }
 }
 
@@ -62,7 +66,11 @@ enum AppInfoContent: Int, CaseIterable, Equatable {
     
     var caption: String {
         switch self {
-        case .data: return "Lokalizacja GPS autobusów i tramwajów w Warszawie, źródlo danych pochodzi z Miasto Stołeczne Warszawa, i zostało pozyskane: "
+        case .data: return "Aplikacja przedstawia lokalizację GPS autobusów i tramwajów w Warszawie, źródło danych pochodzi z Miasto Stołeczne Warszawa, i zostało pozyskane: "
         }
+    }
+    
+    var timeDilatation: String {
+        return "Przedstawione w Aplikacji dane mają charakter poglądowy. Dane GPS podawane są najczęściej z około dwudziestosekundowym opóźnieniem."
     }
 }

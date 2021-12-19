@@ -24,7 +24,7 @@ struct Home: View {
     var body: some View {
         ZStack {
             if showingSideMenu {
-                SideMenuView(isShowing: $showingSideMenu, currentDate: $fetcher.currentDate)
+                SideMenuView(isShowing: $showingSideMenu, currentDate: $fetcher.currentDate, availableBusesAndTrams: $fetcher.busesAndTrams)
             }
             
             MapViewRep(busesAndTrams: fetcher.busesAndTrams, vehicleDictionary: fetcher.vehicleDictionary)
@@ -52,7 +52,7 @@ struct Home: View {
                             .background(colorScheme == .dark ? Color.graySearchBackground.opacity(0.55) : .white)
                             .clipShape(Circle())
                             .foregroundColor(colorScheme == .dark ? .white : Color.graySearchBackground.opacity(0.55))
-                            .shadow(color: .gray, radius: 1, x: 0, y: 1)
+                            .shadow(color: colorScheme == .dark ? .black : .gray, radius: 1, x: 0, y: 1)
                     })
                     Spacer()
                 }
@@ -118,7 +118,7 @@ struct RightPanelButtons: View {
                             .background(colorScheme == .dark ? Color.graySearchBackground.opacity(0.55) : .white)
                             .clipShape(Circle())
                             .foregroundColor(colorScheme == .dark ? .white : Color.graySearchBackground.opacity(0.55))
-                            .shadow(color: .gray, radius: 1, x: 0, y: 1)
+                            .shadow(color: colorScheme == .dark ? .black : .gray, radius: 1, x: 0, y: 1)
                     })
                     .fullScreenCover(isPresented: $showSearchLinesView, content: {
                         ModalPopUpView(fetcher: fetcher, showSearchLinesView: $showSearchLinesView, favouriteLines: $fetcher.favouriteLinesName)
@@ -137,7 +137,7 @@ struct RightPanelButtons: View {
                             .background(colorScheme == .dark ? Color.graySearchBackground.opacity(0.55) : .white)
                             .clipShape(Circle())
                             .foregroundColor(colorScheme == .dark ? .white : Color.graySearchBackground.opacity(0.55))
-                            .shadow(color: .gray, radius: 1, x: 0, y: 1)
+                            .shadow(color: colorScheme == .dark ? .black : .gray, radius: 1, x: 0, y: 1)
                     })
                     .alert(isPresented: $goToSettings) {
                         Alert(title: Text("Lokalizacja niedostępna"), message: Text("Odrzuciłeś możliwość ustaleniapołożenia urządzenia. Aby skorzystać zmień to w ustawieniach"), primaryButton:.default(Text("Idź do ustawień")) {
@@ -154,7 +154,7 @@ struct RightPanelButtons: View {
                             .background(colorScheme == .dark ? Color.graySearchBackground.opacity(0.55) : .white)
                             .clipShape(Circle())
                             .foregroundColor(colorScheme == .dark ? .white : Color.graySearchBackground.opacity(0.55))
-                            .shadow(color: .gray, radius: 1, x: 0, y: 1)
+                            .shadow(color: colorScheme == .dark ? .black : .gray, radius: 1, x: 0, y: 1)
                     })
                 }
             }

@@ -15,13 +15,8 @@ struct SplashScreen: View {
     
     var body: some View {
         ZStack {
-            if colorScheme == .dark {
-                Color.black
-                    .ignoresSafeArea()
-            } else {
-                Color.white
-                    .ignoresSafeArea()
-            }
+            Color(uiColor: .systemBackground)
+                .ignoresSafeArea()
             
             VStack {
                 LottieView(filename: colorScheme == .dark ? "splash_screen_dark" : "splash_screen_light")

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StandardFavouriteLineView: View {
+    @Environment(\.colorScheme) var colorScheme
     var favouriteLine: String
     @Binding var favouriteLines: [String]
     
@@ -22,6 +23,7 @@ struct StandardFavouriteLineView: View {
                     .strokeBorder(favouriteLine.count > 2 ? Color(UIColor(named: "busCol")!):Color(UIColor(named: "tramCol")!), lineWidth: 3)
                     .background(Circle().foregroundColor(.white))
                     .frame(width: 65, height: 65)
+                    .shadow(color: colorScheme == .dark ? .black : .gray, radius: 1, x: 0, y: 1)
                     .padding(4)
             })
             
