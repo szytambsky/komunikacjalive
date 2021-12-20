@@ -29,7 +29,7 @@ struct SideMenuView: View {
                 SideMenuHeaderView(isShowing: $isShowing)
                 
                 VStack(alignment: .leading) {
-                    Text("Dostępne pojazdy:")
+                    Text("Dostępne linie:")
                         .font(.system(size: 15, weight: .bold))
                     
                     HStack(spacing: 12) {
