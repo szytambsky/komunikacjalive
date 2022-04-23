@@ -11,8 +11,8 @@ struct OnboardingContainerView: View {
     @Binding var isOnboarding: Bool
     
     let onboardingFeatures = [
-        Feature(title: "Zacznij już dziś", subtitle: "Miej swoje ulubione linie zawsze na wyciągniecie ręki", image: "ob-subway"),
-        Feature(title: "Bądź na czas", subtitle: "Dostęp ułatwi Ci proszuanie się po mieście", image: "ob-travel"),
+        Feature(title: "Zacznij już dziś", subtitle: "Twoje ulubione linie zawsze na wyciągnięcie ręki", image: "ob-subway"),
+        Feature(title: "Bądź na czas", subtitle: "Dostęp ułatwi Ci poruszanie się po mieście", image: "ob-travel"),
         Feature(title: "Rozpocznij z nami", subtitle: "Najwygodniejsze narzędzie czeka", image: "ob-adventure")
     ]
     
