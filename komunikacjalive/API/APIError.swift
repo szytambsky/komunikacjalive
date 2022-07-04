@@ -14,8 +14,8 @@ enum APIError: Error, CustomStringConvertible {
     case parsing(DecodingError?)
     case unknown
     
+    // user feedback
     var localizedDescription: String {
-        // user feedback
         switch self {
         case .badURL, .parsing, .unknown:
             return "Sorry, something went wrong."
@@ -26,8 +26,8 @@ enum APIError: Error, CustomStringConvertible {
         }
     }
     
+    // info for debugging
     var description: String {
-        // info for debugging
         switch self {
         case .badURL: return "invalid url"
         case .unknown: return "unknown error"

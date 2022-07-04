@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct ErrorView: View {
-    @ObservedObject var fetcher: LineViewModel
+    @ObservedObject var viewModel: LineViewModel
     
     var body: some View {
         VStack {
             Text("Error view")
                 .font(.system(size: 18))
             
-            Text(fetcher.errorMessage ?? "")
+            Text(viewModel.errorMessage ?? "")
             
             Button(action: {
-                fetcher.fetchLines()
+                viewModel.fetchLines()
             }, label: {
                 Text("Try Again")
             })
@@ -28,6 +28,6 @@ struct ErrorView: View {
 
 struct ErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        ErrorView(fetcher: LineViewModel())
+        ErrorView(viewModel: LineViewModel())
     }
 }

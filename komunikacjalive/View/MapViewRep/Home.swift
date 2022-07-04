@@ -11,27 +11,27 @@ import MapKit
 struct Home: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var mapData = MapViewModel()
-    @ObservedObject var fetcher = LineViewModel()
+    @ObservedObject var viewModel: LineViewModel
     @State private var showingSideMenu = false
     
     @State private var showSearchLinesView = false
     
-    let screen = UIScreen.main.bounds
+    private let screen = UIScreen.main.bounds
 
-    @State var counter = 0
+    @State private var counter = 0
     let timer = Timer.publish(every: 15, tolerance: 0.5, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
             if showingSideMenu {
-                SideMenuView(isShowing: $showingSideMenu, currentDate: $fetcher.currentDate, availableBusesAndTrams: $fetcher.busesAndTrams)
+                SideMenuView(isShowing: $showingSideMenu, currentDate: $viewModel.currentDate, availableBusesAndTrams: $viewModel.busesAndTrams)
             }
             
-            MapViewRep(busesAndTrams: fetcher.busesAndTrams, vehicleDictionary: fetcher.vehicleDictionary)
+            MapViewRep(busesAndTrams: viewModel.busesAndTrams, vehicleDictionary: viewModel.vehicleDictionary)
                 .cornerRadius(showingSideMenu ? 20 : 10)
                 .environmentObject(mapData)
                 .onReceive(timer, perform: { time in
-                    fetcher.fetchLines()
+                    viewModel.fetchLines()
                 })
                 .offset(x: showingSideMenu ? (screen.width / 1.52) : 0, y: showingSideMenu ? (screen.height / 9) : 0)
                 .opacity(showingSideMenu ? 0.25 : 1)
@@ -63,7 +63,7 @@ struct Home: View {
                 
                 Spacer()
                 
-                RightPanelButtons(fetcher: fetcher, showSearchLinesView: $showSearchLinesView, favouriteLines: $fetcher.favouriteLinesName)
+                RightPanelButtons(fetcher: viewModel, showSearchLinesView: $showSearchLinesView, favouriteLines: $viewModel.favouriteLinesName)
                     .environmentObject(mapData)
                     .padding(.trailing, 16)
                     .opacity(showingSideMenu ? 0 : 1)
@@ -72,7 +72,7 @@ struct Home: View {
                 Spacer()
             }
             
-            if fetcher.isLoading {
+            if viewModel.isLoading {
                 LoadingView()
             }
         }
@@ -89,7 +89,7 @@ struct Home_Previews: PreviewProvider {
         ZStack {
             Color.black
                 .edgesIgnoringSafeArea(.all)
-            Home()
+            Home(viewModel: LineViewModel())
                 .edgesIgnoringSafeArea(.all)
         }
     }
@@ -101,7 +101,7 @@ struct RightPanelButtons: View {
     @ObservedObject var fetcher: LineViewModel
     @Binding var showSearchLinesView: Bool
     @Binding var favouriteLines: [String]
-    @State var goToSettings = false
+    @State private var goToSettings = false
     
     var body: some View {
         HStack {

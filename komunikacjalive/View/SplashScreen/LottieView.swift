@@ -10,7 +10,7 @@ import Lottie
 
 struct LottieView: UIViewRepresentable {
     typealias UIViewType = UIView
-    var filename: String
+    let filename: String
     
     func makeUIView(context: Context) -> UIView {
         let view = UIView(frame: .zero)

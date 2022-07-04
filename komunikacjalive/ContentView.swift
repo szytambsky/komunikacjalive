@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Home()
+                Home(viewModel: LineViewModel())
                     .navigationBarTitle("", displayMode: .inline)
                     .navigationBarHidden(self.isNavigationBarHidden)
                     .onAppear(perform: {

@@ -10,28 +10,28 @@ import Combine
 import MapKit
 import SwiftUI
 
-class LineViewModel: ObservableObject {
-    @Published var isLoading: Bool = false
+
+final class LineViewModel: ObservableObject {
+    @Published private (set) var isLoading: Bool = false
     @Published var errorMessage: String? = nil
     @Published(key: "favouriteLinesName") var favouriteLinesName = [String]()
     @Published var currentDate: String = "Nie znaleziono daty"
     @Published var busesAndTrams = [BusAndTram]()
     @Published var favouriteBusesAndTram = [BusAndTram]()
-    @Published var vehicleDictionary = [String: VehicleAnnotation]()
+    @Published private (set) var vehicleDictionary = [String: VehicleAnnotation]()
     
     // MARK: - TO DO: hide api key
-    let apiKey = "d6879599-0251-48ec-8255-8eca1412a91a"
+    private let apiKey = "d6879599-0251-48ec-8255-8eca1412a91a"
     
-    let service: LineService
+    private let service: LineServiceProtocol
     var subscriptions = Set<AnyCancellable>()
     
-    init(service: LineService = LineService()) {
+    init(service: LineServiceProtocol = LineService()) {
         self.service = service
         fetchLines()
     }
     
     func fetchLines() {
-        print("Debug: - fetch lines call on timer publisher")
         isLoading = true
         errorMessage = nil
         
@@ -63,7 +63,7 @@ class LineViewModel: ObservableObject {
             }.store(in: &subscriptions)
     }
     
-    func specifyFavouriteLines() {
+    private func specifyFavouriteLines() {
         $favouriteLinesName
             .removeDuplicates()
             .map({ [unowned self] selectedLinesNames in
@@ -92,18 +92,5 @@ class LineViewModel: ObservableObject {
                 return dict
             })
             .assign(to: &$vehicleDictionary)
-    }
-    
-    // MARK: - MOCK DATA
-    static func errorState() -> LineViewModel {
-        let viewModel = LineViewModel()
-        viewModel.errorMessage = APIError.url(URLError.init(.notConnectedToInternet)).localizedDescription
-        return viewModel
-    }
-    
-    static func successState() -> LineViewModel {
-        let viewModel = LineViewModel()
-        //viewModel.lines = []//exampleAnnotation1, exampleAnnotation2]
-        return viewModel
     }
 }
