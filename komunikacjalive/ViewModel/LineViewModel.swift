@@ -20,11 +20,16 @@ final class LineViewModel: ObservableObject {
     @Published var favouriteBusesAndTram = [BusAndTram]()
     @Published private (set) var vehicleDictionary = [String: VehicleAnnotation]()
     
+    private let timer = Timer.publish(every: 15, tolerance: 0.5, on: .main, in: .common).autoconnect()
+    @Published var time: Date = Date()
+    
     // MARK: - TO DO: hide api key
     private let apiKey = "d6879599-0251-48ec-8255-8eca1412a91a"
     
     private let service: LineServiceProtocol
-    var subscriptions = Set<AnyCancellable>()
+    
+    private var subscriptions = Set<AnyCancellable>()
+    private var timerSubsription: Cancellable?
     
     init(service: LineServiceProtocol = LineService()) {
         self.service = service
@@ -92,5 +97,20 @@ final class LineViewModel: ObservableObject {
                 return dict
             })
             .assign(to: &$vehicleDictionary)
+    }
+}
+
+
+// MARK: - Timer.TimerPublisher
+
+extension LineViewModel {
+    
+    /// Create subsription to Timer.TimerPublisher and starts emitting values.
+    func startTimer() {
+        timerSubsription = timer.assign(to: \.time, on: self)
+    }
+    /// Close subscription to Timer.TimerPublisher and stop emitting values.
+    func stopTimer() {
+        timerSubsription = nil
     }
 }

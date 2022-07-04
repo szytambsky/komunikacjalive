@@ -17,9 +17,6 @@ struct Home: View {
     @State private var showSearchLinesView = false
     
     private let screen = UIScreen.main.bounds
-
-    @State private var counter = 0
-    let timer = Timer.publish(every: 15, tolerance: 0.5, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
@@ -30,7 +27,7 @@ struct Home: View {
             MapViewRep(busesAndTrams: viewModel.busesAndTrams, vehicleDictionary: viewModel.vehicleDictionary)
                 .cornerRadius(showingSideMenu ? 20 : 10)
                 .environmentObject(mapData)
-                .onReceive(timer, perform: { time in
+                .onReceive(viewModel.$time, perform: { time in
                     viewModel.fetchLines()
                 })
                 .offset(x: showingSideMenu ? (screen.width / 1.52) : 0, y: showingSideMenu ? (screen.height / 9) : 0)
@@ -38,6 +35,12 @@ struct Home: View {
                 .scaleEffect(showingSideMenu ? 0.9 : 1)
                 .shadow(color: showingSideMenu ? .black : .clear, radius: 20, x: 0, y: 0)
                 .disabled(showingSideMenu)
+                .onAppear {
+                    viewModel.startTimer()
+                }
+                .onDisappear {
+                    viewModel.stopTimer()
+                }
             
             VStack {
                 HStack {
