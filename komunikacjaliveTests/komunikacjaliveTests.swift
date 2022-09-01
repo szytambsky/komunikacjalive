@@ -6,30 +6,49 @@
 //
 
 import XCTest
+import MapKit
+import SwiftUI
+@testable import komunikacjalive
 
 class komunikacjaliveTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    var sut: MapViewRep!
+    
+    override func setUp() {
+        super.setUp()
+        
+        self.sut = MapViewRep(busesAndTrams: MockData.allExampleAnnotations, vehicleDictionary: ["5555": MockData.exampleAnnotation1])
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func test_IfCustomAnnotationIsInheritedFromMKAnnotationView() throws {
+        let exampleAnnotation = VehicleAnnotation(lineName: "7", vehicleNumber: "5555", brigade: "7", latitude: 52.235031, longitude: 21.01876, coordinate: CLLocationCoordinate2D(latitude: 52.235031, longitude: 21.01876), title: "7", subtitle: "5555")
+        
+        let annotationView = AnnotationView(annotation: exampleAnnotation, reuseIdentifier: "exampleIdentifier")
+        
+        XCTAssertTrue((annotationView as Any) is MKAnnotationView)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_IfAngleFromCoordinateIsZero() throws {
+        let oldLocation = CLLocationCoordinate2D(latitude: 52.235031, longitude: 21.01876)
+        let newLocation = CLLocationCoordinate2D(latitude: 52.235031, longitude: 21.01876)
+        
+        let getAngle = self.sut.angleFromCoordinate(firstCoordinate: oldLocation, secondCoordinate: newLocation)
+        
+        XCTAssertTrue(getAngle == 0.0)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_IfAvailableCountOfBusesOrTramsAreTrue() throws {
+        let availableBuses = MockData.allExampleAnnotations.unique(map: { $0.lineName }).filter({ $0.lineName.count > 2 }).count
+        let availableTrams = MockData.allExampleAnnotations.unique(map: { $0.lineName }).filter({ $0.lineName.count <= 2 }).count
+        let availableAirplanes = MockData.allExampleAnnotations.unique(map: { $0.lineName }).filter({ $0.lineName.count > 5 }).count
+        
+        XCTAssertTrue(availableTrams == 2)
+        XCTAssertTrue(availableBuses == 1)
+        XCTAssertTrue(availableAirplanes == 0)
+    }
+    
+    func test_IfRectAfterRotatingIsCorrectlyBounded() throws {
+    
     }
 
 }

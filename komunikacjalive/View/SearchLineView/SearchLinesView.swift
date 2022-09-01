@@ -43,7 +43,7 @@ struct SearchLinesView_Previews: PreviewProvider {
             Color.black
                 .edgesIgnoringSafeArea(.all)
             
-            SearchLinesView(lines: allExampleAnnotations, favouriteLines: .constant(exampleLinesString))
+            SearchLinesView(lines: MockData.allExampleAnnotations, favouriteLines: .constant(MockData.exampleLinesString))
         }
     }
 }

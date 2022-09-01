@@ -42,7 +42,7 @@ struct StandardLineView: View {
 
 struct StandardLineView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardLineView(line: busexample1, favouriteLines: .constant(exampleLinesString)) {
+        StandardLineView(line: MockData.busexample1, favouriteLines: .constant(MockData.exampleLinesString)) {
             //
         }
     }

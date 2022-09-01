@@ -37,6 +37,6 @@ struct StandardFavouriteLineView: View {
 
 struct StandardFavouriteLineView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardFavouriteLineView(favouriteLine: "151", favouriteLines: .constant(exampleLinesString), action: {})
+        StandardFavouriteLineView(favouriteLine: "151", favouriteLines: .constant(MockData.exampleLinesString), action: {})
     }
 }

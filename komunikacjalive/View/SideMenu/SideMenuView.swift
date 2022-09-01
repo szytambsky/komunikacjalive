@@ -96,7 +96,7 @@ struct SideMenuView: View {
 
 struct SideMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        SideMenuView(isShowing: .constant(true), currentDate: .constant("brak daty"), availableBusesAndTrams: .constant(allExampleAnnotations))
+        SideMenuView(isShowing: .constant(true), currentDate: .constant("brak daty"), availableBusesAndTrams: .constant(MockData.allExampleAnnotations))
     }
 }
 

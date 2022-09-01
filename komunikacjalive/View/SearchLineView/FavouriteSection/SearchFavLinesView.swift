@@ -36,6 +36,6 @@ struct SearchFavLinesView: View {
 
 struct SearchFavLinesView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchFavLinesView(favouriteLines: .constant(exampleLinesString))
+        SearchFavLinesView(favouriteLines: .constant(MockData.exampleLinesString))
     }
 }

@@ -38,6 +38,16 @@
                ReferencedContainer = "container:komunikacjalive.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C241243228C0C16E00022D44"
+               BuildableName = "komunikacjaliveUITests.xctest"
+               BlueprintName = "komunikacjaliveUITests"
+               ReferencedContainer = "container:komunikacjalive.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

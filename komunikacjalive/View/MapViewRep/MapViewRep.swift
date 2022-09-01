@@ -79,11 +79,6 @@ struct MapViewRep: UIViewRepresentable {
         }
     }
     
-    func boundingRectAfterRotatingRect(rect: CGRect, toAngle radians: CGFloat) -> CGRect {
-        let xfrm = CGAffineTransform(rotationAngle: radians)
-        return rect.applying(xfrm)
-    }
-    
     func angleFromCoordinate(firstCoordinate: CLLocationCoordinate2D, secondCoordinate: CLLocationCoordinate2D) -> Double {
         let deltaLongitude: Double = secondCoordinate.longitude - firstCoordinate.longitude
         let deltaLatitude: Double = secondCoordinate.latitude - firstCoordinate.latitude
