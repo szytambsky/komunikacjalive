@@ -30,6 +30,7 @@
 		C25C94F5276FA3F10021FCA2 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C25C94F4276FA3F10021FCA2 /* Lottie */; };
 		C260568826FB74A400A7CF63 /* BusAndTram.swift in Sources */ = {isa = PBXBuildFile; fileRef = C260568726FB74A400A7CF63 /* BusAndTram.swift */; };
 		C261BE5E27459DCD00553072 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C261BE5D27459DCD00553072 /* LottieView.swift */; };
+		C266019C287A27D400E49252 /* LazyBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266019B287A27D400E49252 /* LazyBoxView.swift */; };
 		C2666802276CF3160055DC7B /* komunikacjaliveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2666801276CF3160055DC7B /* komunikacjaliveTests.swift */; };
 		C2666809276CF3680055DC7B /* VehicleDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2666808276CF3680055DC7B /* VehicleDataTest.swift */; };
 		C26A559826ED55EF00199CC6 /* LineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A559726ED55EF00199CC6 /* LineService.swift */; };
@@ -85,6 +86,7 @@
 		C2588F8326DFBD2B00574135 /* VehicleAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleAnnotation.swift; sourceTree = "<group>"; };
 		C260568726FB74A400A7CF63 /* BusAndTram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusAndTram.swift; sourceTree = "<group>"; };
 		C261BE5D27459DCD00553072 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		C266019B287A27D400E49252 /* LazyBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyBoxView.swift; sourceTree = "<group>"; };
 		C26667FF276CF3160055DC7B /* komunikacjaliveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = komunikacjaliveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2666801276CF3160055DC7B /* komunikacjaliveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = komunikacjaliveTests.swift; sourceTree = "<group>"; };
 		C2666808276CF3680055DC7B /* VehicleDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDataTest.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		C22A91C326DFAA5A007C5AAE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C266019A287A27AE00E49252 /* LazyBoxView */,
 				C241E68C27161CAB00F6F5F7 /* SideMenu */,
 				C24FEA7A270F5AFE00B61F79 /* Onboarding */,
 				C29F5DFA26E1923500E3B35B /* SearchLineView */,
@@ -259,6 +262,14 @@
 				C261BE5D27459DCD00553072 /* LottieView.swift */,
 			);
 			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		C266019A287A27AE00E49252 /* LazyBoxView */ = {
+			isa = PBXGroup;
+			children = (
+				C266019B287A27D400E49252 /* LazyBoxView.swift */,
+			);
+			path = LazyBoxView;
 			sourceTree = "<group>";
 		};
 		C2666800276CF3160055DC7B /* komunikacjaliveTests */ = {
@@ -435,6 +446,7 @@
 				C2588F8426DFBD2B00574135 /* VehicleAnnotation.swift in Sources */,
 				C2C7C80F26ED7E2500844546 /* LoadingView.swift in Sources */,
 				C2F8D75027615C69005BC75B /* SideMenuAppInfo.swift in Sources */,
+				C266019C287A27D400E49252 /* LazyBoxView.swift in Sources */,
 				C22A919526DFAA24007C5AAE /* komunikacjaliveApp.swift in Sources */,
 				C241E68E27161DE500F6F5F7 /* SideMenuView.swift in Sources */,
 				C2CEF9A126F397A3001BC244 /* MapViewRep.swift in Sources */,

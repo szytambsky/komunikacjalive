@@ -9,6 +9,10 @@ import SwiftUI
 
 struct SideMenuPrivacyPolicy: View {
     
+    init() {
+        print("side menu privacy policy initialized")
+    }
+    
     var body: some View {
         ZStack {
             Color(uiColor: .systemBackground)

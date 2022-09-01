@@ -13,7 +13,6 @@ struct ModalPopUpView: View {
     @Binding var showSearchLinesView: Bool
     
     @Binding var favouriteLines: [String]
-    @State private var isFavouriteSection: Bool = false
     
     var filteredLines: [BusAndTram] {
         if searchText.count == 0 {
@@ -22,6 +21,16 @@ struct ModalPopUpView: View {
             let arr = fetcher.busesAndTrams.sorted {$0.lineName.localizedStandardCompare($1.lineName) == .orderedAscending}.unique(map: { $0.lineName })
             return arr.filter({ $0.lineName.contains(searchText)})
         }
+    }
+    
+    init(fetcher: LineViewModel,
+         showSearchLinesView: Binding<Bool>,
+         favouriteLines: Binding<[String]>
+    ) {
+        self.fetcher = fetcher
+        self._showSearchLinesView = showSearchLinesView
+        self._favouriteLines = favouriteLines
+        self._searchText = State(initialValue: "")
     }
     
     var body: some View {

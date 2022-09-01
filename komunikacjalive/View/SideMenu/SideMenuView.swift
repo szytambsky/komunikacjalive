@@ -70,9 +70,12 @@ struct SideMenuView: View {
                     }
                     NavigationLink(
                         destination:
-                            getDestination(forOption: option)
-                            .navigationTitle("\(option.title)")
-                            .navigationBarTitleDisplayMode(.inline),
+                            LazyBoxView(view: {
+                                getDestination(forOption: option)
+                                .navigationTitle("\(option.title)")
+                                .navigationBarTitleDisplayMode(.inline)
+                            }),
+                            
                         label: {
                             SideMenuCell(option: option)
                         })

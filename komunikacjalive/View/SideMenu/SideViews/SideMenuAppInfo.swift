@@ -16,6 +16,11 @@ struct SideMenuAppInfo: View {
         return date[0]
     }
     
+    init(currentDate: Binding<String>) {
+        self._currentDate = currentDate
+        print("side menu app info initialized")
+    }
+    
     var body: some View {
         ZStack {
             Color(uiColor: .systemBackground)
