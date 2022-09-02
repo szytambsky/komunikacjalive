@@ -126,6 +126,7 @@ struct RightPanelButtons: View {
                     .fullScreenCover(isPresented: $showSearchLinesView, content: {
                         ModalPopUpView(fetcher: fetcher, showSearchLinesView: $showSearchLinesView, favouriteLines: $fetcher.favouriteLinesName)
                     })
+                    .accessibilityIdentifier("rightPanelSearchButton")
                     
                     Button(action: {
                         if mapData.isAuthorized {
@@ -164,3 +165,4 @@ struct RightPanelButtons: View {
         }
     }
 }
+

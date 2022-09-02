@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C20A88B228C14B2700DEC987 /* PageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20A88B128C14B2700DEC987 /* PageObject.swift */; };
 		C21029EB27466C5F0086B9B4 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21029EA27466C5F0086B9B4 /* Appearance.swift */; };
 		C2165D7E26E6CD2200808E86 /* LineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2165D7D26E6CD2200808E86 /* LineViewModel.swift */; };
 		C2223256275848A10071A38F /* SideMenuPrivacyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2223255275848A10071A38F /* SideMenuPrivacyPolicy.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C20A88B128C14B2700DEC987 /* PageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageObject.swift; sourceTree = "<group>"; };
 		C21029EA27466C5F0086B9B4 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		C2165D7D26E6CD2200808E86 /* LineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewModel.swift; sourceTree = "<group>"; };
 		C2223255275848A10071A38F /* SideMenuPrivacyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuPrivacyPolicy.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			children = (
 				C241243528C0C16E00022D44 /* komunikacjaliveUITests.swift */,
 				C241243728C0C16E00022D44 /* komunikacjaliveUITestsLaunchTests.swift */,
+				C20A88B128C14B2700DEC987 /* PageObject.swift */,
 			);
 			path = komunikacjaliveUITests;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C241243828C0C16E00022D44 /* komunikacjaliveUITestsLaunchTests.swift in Sources */,
+				C20A88B228C14B2700DEC987 /* PageObject.swift in Sources */,
 				C241243628C0C16E00022D44 /* komunikacjaliveUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

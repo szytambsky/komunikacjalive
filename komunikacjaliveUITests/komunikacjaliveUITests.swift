@@ -6,36 +6,52 @@
 //
 
 import XCTest
+import SwiftUI
 
 class komunikacjaliveUITests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+        super.setUp()
         let app = XCUIApplication()
+        app.setIsAppOnboarding(false)
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        continueAfterFailure = false
+        sleep(10)
+        
+        addUIInterruptionMonitor(withDescription: "Automatically allow location permissions") { alert in
+            sleep(2)
+            let button = alert.buttons["Allow"]
+            if button.exists {
+                button.tap()
+                return true
+            }
+            return false
+        }
     }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    override func tearDown() {
+        super.tearDown()
+        XCUIApplication().terminate()
+    }
+    
+    func test_IfRightPanelSearchButtonIsAvailable() {
+        XCTAssert(PageObject.rightPanelSearchButton.exists)
+    }
+    
+    func test_IfButtonsAreTappableAndUntappableAfterNavigatedToSearchLinesView() throws {
+        XCTAssert(PageObject.rightPanelSearchButton.isEnabled == true)
+        
+        PageObject.rightPanelSearchButton.tap()
+        
+        XCTAssert(PageObject.rightPanelSearchButton.isEnabled == true)
+    }
+}
+
+
+// MARK: - XCUIApplication
+
+extension XCUIApplication {
+    func setIsAppOnboarding(_ isOnboarding: Bool = false) {
+        launchArguments += ["-isOnboarding", isOnboarding ? "true" : "false"]
     }
 }
