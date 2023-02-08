@@ -1,9 +1,8 @@
 # komunikacjalive
 Application showing live coordinates of buses and trams in capital city of Warsaw.
 
-Data is constantly fetched thanks to sharing it in https://api.um.warszawa.pl/
-Make an account on https://api.um.warszawa.pl/ and put your generated API key.
-Keep in mind the app is still in a state of development.
+Data is constantly fetched thanks to sharing it in https://api.um.warszawa.pl/.
+To generate your own API key make an account there. Keep in mind the app is still in a state of development.
 
 ---
 
