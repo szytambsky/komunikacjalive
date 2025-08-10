@@ -1,3 +1,5 @@
+> ⚠️  As of today, the application is no longer being developed. (2025) ![Project Status](https://img.shields.io/badge/status-discontinued-red?style=for-the-badge&logo=github)
+
 # komunikacjalive
 Application showing live coordinates of buses and trams in capital city of Warsaw.
 
